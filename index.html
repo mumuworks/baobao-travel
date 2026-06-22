@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -292,31 +293,24 @@ textarea.form-input{resize:vertical;min-height:80px;line-height:1.6}
       <p class="hero-sub">把喜歡的地方，慢慢收集起來</p>
       <h1 class="hero-title">🎒 我們的旅行手帳</h1>
     </section>
-    <section class="recent-trips" style="margin-bottom:28px">
-      <div class="section-header">
-        <div class="section-label">📸 最近旅行</div>
-        <button class="link-btn" onclick="goTo('records')">全部 →</button>
-      </div>
-      <div class="trip-cards" id="home-cards"></div>
-    </section>
-    <section class="quick-stats">
-      <div class="stat-card" onclick="goTo('map')">
-        <div class="stat-icon">🗺️</div>
-        <div class="stat-info">
-          <div class="stat-label">去過的城市</div>
-          <div class="stat-value">4 <span class="stat-unit">個地方</span></div>
+    <!-- 1. 旅行基金進度 -->
+    <section style="margin-bottom:20px">
+      <div class="section-label">💰 旅行基金進度</div>
+      <div class="next-trip-card" style="cursor:pointer" onclick="goTo('piggy')">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <div style="font-size:.88rem;color:var(--text)">本金 <strong>$50,000</strong></div>
+          <div style="font-size:.88rem;color:var(--profit);font-weight:600">獲利 + $8,000</div>
         </div>
-      </div>
-      <div class="stat-card blue" onclick="goTo('piggy')">
-        <div class="stat-icon">✈️</div>
-        <div class="stat-info">
-          <div class="stat-label">旅行基金</div>
-          <div class="stat-value">8,000 <span class="stat-unit">/ 30,000</span></div>
-          <div class="mini-bar"><div class="mini-fill" style="width:26.6%"></div></div>
+        <div class="trip-progress-row" style="margin-bottom:6px">
+          <div class="trip-progress-bar"><div class="trip-progress-fill" style="width:26.6%"></div></div>
+          <div class="trip-progress-pct">26.6%</div>
         </div>
+        <div style="font-size:.76rem;color:var(--text-sub);text-align:right">查看明細 →</div>
       </div>
     </section>
-    <section class="next-trip" style="margin-top:16px">
+
+    <!-- 2. 下一次旅行目標 -->
+    <section style="margin-bottom:20px">
       <div class="section-label">✈️ 下一次旅行目標</div>
       <div class="next-trip-card">
         <div class="trip-destination">🇯🇵 日本大阪</div>
@@ -330,19 +324,32 @@ textarea.form-input{resize:vertical;min-height:80px;line-height:1.6}
         </div>
       </div>
     </section>
-    <section style="margin-top:24px">
-      <div class="section-label">💰 旅行基金進度</div>
-      <div class="next-trip-card" style="cursor:pointer" onclick="goTo('piggy')">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-          <div style="font-size:.88rem;color:var(--text)">本金 <strong>$50,000</strong></div>
-          <div style="font-size:.88rem;color:var(--profit);font-weight:600">獲利 + $8,000</div>
+
+    <!-- 3. 旅行足跡（唯一城市數） -->
+    <section style="margin-bottom:20px">
+      <div class="section-label">🗺️ 旅行足跡</div>
+      <div class="next-trip-card" style="cursor:pointer" onclick="goTo('map')">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div>
+            <div style="font-family:var(--font-serif);font-size:1.3rem;font-weight:700;color:var(--text)">
+              <span id="home-city-count">—</span>
+              <span style="font-family:var(--font-body);font-size:.78rem;font-weight:400;color:var(--text-sub)"> 個城市</span>
+            </div>
+            <div style="font-size:.76rem;color:var(--text-sub);margin-top:4px" id="home-city-list">載入中…</div>
+          </div>
+          <div style="font-size:1.8rem">🗺️</div>
         </div>
-        <div class="trip-progress-row" style="margin-bottom:6px">
-          <div class="trip-progress-bar"><div class="trip-progress-fill" style="width:26.6%"></div></div>
-          <div class="trip-progress-pct">26.6%</div>
-        </div>
-        <div style="font-size:.76rem;color:var(--text-sub);text-align:right">查看明細 →</div>
+        <div style="font-size:.76rem;color:var(--text-sub);text-align:right;margin-top:10px">查看地圖 →</div>
       </div>
+    </section>
+
+    <!-- 4. 最近旅行 -->
+    <section>
+      <div class="section-header">
+        <div class="section-label">📸 最近旅行</div>
+        <button class="link-btn" onclick="goTo('records')">全部 →</button>
+      </div>
+      <div class="trip-cards" id="home-cards"></div>
     </section>
   </div>
 </main>
@@ -699,8 +706,23 @@ function renderCards() {
   const sorted = [...TRIPS].sort((a,b)=>b.date.localeCompare(a.date));
   document.getElementById('home-cards').innerHTML = sorted.slice(0,2).map(tripCardHTML).join('');
   document.getElementById('all-cards').innerHTML  = sorted.map(tripCardHTML).join('');
-  // update stat
-  document.querySelectorAll('.city-count').forEach(el=>el.textContent=new Set(TRIPS.map(t=>t.city)).size);
+
+  // 唯一城市數（首頁）
+  const cityCount = {};
+  TRIPS.forEach(t=>{ if(t.city) cityCount[t.city] = (cityCount[t.city]||0)+1; });
+  const uniqueCities = Object.keys(cityCount);
+  const countEl = document.getElementById('home-city-count');
+  const listEl  = document.getElementById('home-city-list');
+  if(countEl) countEl.textContent = uniqueCities.length;
+  if(listEl){
+    if(uniqueCities.length===0){
+      listEl.textContent = '還沒有紀錄，快去旅行吧！';
+    } else {
+      listEl.textContent = uniqueCities
+        .map(c=> cityCount[c]>1 ? `${c}（${cityCount[c]}次）` : c)
+        .join('・');
+    }
+  }
 }
 
 // ── DETAIL MODAL ──
@@ -808,11 +830,16 @@ function showCityTrip(cityKey) {
   if (!ids.length) return;
   const trip = TRIPS.find(t=>t.id===ids[0]);
   if (!trip) return;
+  const visitCount = ids.length;
   document.getElementById('popup-content').innerHTML=`
     <div class="popup-trip-name">${trip.emoji||'📍'} ${trip.name}</div>
-    <div class="popup-meta">📅 ${fmt(trip.date)} ・ 💰 $${(trip.cost||0).toLocaleString()}</div>
-    ${ids.length>1?`<div style="font-size:.76rem;color:var(--text-sub);margin-bottom:10px">共 ${ids.length} 筆紀錄</div>`:''}
-    <button class="popup-view-btn" onclick="openTrip(${trip.id})">查看紀錄</button>`;
+    <div class="popup-meta">
+      📅 ${fmt(trip.date)} ・ 💰 $${(trip.cost||0).toLocaleString()}
+    </div>
+    ${visitCount>1
+      ? `<div style="font-size:.76rem;background:var(--card);border-radius:20px;display:inline-block;padding:3px 10px;margin-bottom:10px;color:var(--highlight)">共去過 ${visitCount} 次</div>`
+      : ''}
+    <div><button class="popup-view-btn" onclick="openTrip(${trip.id})">查看最近紀錄</button></div>`;
   document.getElementById('city-popup').classList.remove('hidden');
 }
 function closeCityPopup(){document.getElementById('city-popup').classList.add('hidden');}
