@@ -4,271 +4,242 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>寶寶旅遊日記</title>
+<title>🎒 寶寶旅遊日記</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet"/>
 <style>
 :root {
-  --bg:         #FAFCFE;
-  --card:       #DCEEF8;
-  --card-blue:  #C8E3F4;
-  --card-deep:  #B8D6EC;
-  --card-warm:  #F8EFCF;
-  --border:     #C8DCE8;
-  --accent:     #7BAEC5;
-  --highlight:  #5A96B4;
-  --text:       #4A5A62;
-  --text-sub:   #7A8E96;
-  --text-light: #AABFC8;
-  --white:      #FFFFFF;
-  --profit:     #6AA080;
-  --loss:       #B07070;
-  --radius-sm:  10px;
-  --radius-md:  16px;
-  --radius-lg:  24px;
-  --shadow:      0 2px 14px rgba(80,120,150,0.10);
-  --shadow-hover:0 4px 22px rgba(80,120,150,0.18);
-  --font-serif: 'Noto Serif TC', Georgia, serif;
-  --font-body:  -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --bg:       #FAFCFE;
+  --card:     #DCEEF8;
+  --card2:    #C8E3F4;
+  --warm:     #F8EFCF;
+  --border:   #C8DCE8;
+  --accent:   #7BAEC5;
+  --hi:       #5A96B4;
+  --text:     #4A5A62;
+  --sub:      #7A8E96;
+  --light:    #AABFC8;
+  --white:    #FFFFFF;
+  --green:    #6AA080;
+  --red:      #B07070;
+  --rsm:10px; --rmd:16px; --rlg:24px;
+  --sh:0 2px 14px rgba(80,120,150,.10);
+  --shh:0 4px 22px rgba(80,120,150,.18);
+  --serif:'Noto Serif TC',Georgia,serif;
+  --body:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:16px;-webkit-text-size-adjust:100%}
-body{background:var(--bg);color:var(--text);font-family:var(--font-body);min-height:100vh;padding-bottom:48px}
+body{background:var(--bg);color:var(--text);font-family:var(--body);min-height:100vh;padding-bottom:60px}
 
 /* NAV */
-.topnav{
-  position:sticky;top:0;z-index:100;
-  background:var(--white);border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 16px;height:56px;gap:12px;
-}
-.nav-brand{font-family:var(--font-serif);font-weight:700;font-size:.95rem;color:var(--text);white-space:nowrap;flex-shrink:0}
+.topnav{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 16px;height:56px;gap:12px}
+.nav-brand{font-family:var(--serif);font-weight:700;font-size:.95rem;color:var(--text);white-space:nowrap;flex-shrink:0}
 .nav-links{display:flex;gap:4px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:8px 0}
 .nav-links::-webkit-scrollbar{display:none}
-.nav-btn{background:none;border:none;font-family:var(--font-body);font-size:.82rem;color:var(--text-sub);padding:6px 11px;border-radius:20px;cursor:pointer;white-space:nowrap;transition:background .18s,color .18s}
+.nav-btn{background:none;border:none;font-size:.82rem;color:var(--sub);padding:6px 11px;border-radius:20px;cursor:pointer;white-space:nowrap;transition:background .18s,color .18s}
 .nav-btn:hover{background:var(--card);color:var(--text)}
-.nav-btn.active{background:var(--card-blue);color:var(--highlight);font-weight:600}
+.nav-btn.active{background:var(--card);color:var(--hi);font-weight:600}
 
 /* PAGES */
-.page{display:none}
-.page.active{display:block}
+.page{display:none}.page.active{display:block}
 .container{max-width:560px;margin:0 auto;padding:24px 16px}
 
-/* HERO */
-.hero{padding:8px 0 22px}
-.hero-sub{font-size:.82rem;color:var(--text-sub);letter-spacing:.08em;margin-bottom:6px}
-.hero-title{font-family:var(--font-serif);font-size:1.65rem;font-weight:700;color:var(--text);line-height:1.3}
+/* SECTION LABEL */
+.sec-label{font-size:.74rem;font-weight:600;color:var(--sub);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px}
+.sec-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.link-btn{background:none;border:none;font-size:.8rem;color:var(--accent);cursor:pointer;padding:2px 4px}
 
-/* QUICK STATS */
-.quick-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px}
-.stat-card{background:var(--white);border-radius:var(--radius-md);padding:16px;display:flex;align-items:flex-start;gap:10px;cursor:pointer;border:1px solid var(--border);transition:box-shadow .18s,transform .18s}
-.stat-card:hover{box-shadow:var(--shadow-hover);transform:translateY(-1px)}
-.stat-card.blue{background:var(--card)}
-.stat-icon{font-size:1.4rem;line-height:1}
-.stat-label{font-size:.75rem;color:var(--text-sub);margin-bottom:4px}
-.stat-value{font-family:var(--font-serif);font-size:1.05rem;font-weight:700;color:var(--text)}
-.stat-unit{font-family:var(--font-body);font-size:.7rem;font-weight:400;color:var(--text-sub)}
-.mini-bar{height:4px;background:var(--border);border-radius:2px;margin-top:6px;overflow:hidden}
-.mini-fill{height:100%;background:var(--accent);border-radius:2px}
+/* CARDS */
+.card{background:var(--white);border-radius:var(--rmd);border:1px solid var(--border);padding:18px;margin-bottom:16px}
+.card-blue{background:var(--card)}
+.card-warm{background:var(--warm)}
 
-/* SECTION */
-.section-label{font-size:.76rem;font-weight:600;color:var(--text-sub);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px}
-.section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-.link-btn{background:none;border:none;font-size:.8rem;color:var(--highlight);cursor:pointer;padding:2px 4px}
+/* HOME HERO */
+.hero{padding:8px 0 20px}
+.hero-sub{font-size:.82rem;color:var(--sub);letter-spacing:.08em;margin-bottom:6px}
+.hero-title{font-family:var(--serif);font-size:1.6rem;font-weight:700;color:var(--text);line-height:1.3}
 
-/* NEXT TRIP */
-.next-trip{margin-bottom:28px}
-.next-trip-card{background:var(--white);border-radius:var(--radius-md);padding:18px;border:1px solid var(--border)}
-.trip-destination{font-family:var(--font-serif);font-size:1.25rem;font-weight:700;color:var(--text);margin-bottom:14px}
-.trip-progress-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-.trip-progress-bar{flex:1;height:8px;background:var(--border);border-radius:4px;overflow:hidden}
-.trip-progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--highlight));border-radius:4px}
-.trip-progress-pct{font-size:.85rem;font-weight:600;color:var(--highlight);flex-shrink:0}
-.trip-amounts{display:flex;justify-content:space-between;font-size:.82rem;color:var(--text-sub)}
-.trip-amounts strong{color:var(--text)}
+/* PROGRESS BAR */
+.prog-wrap{display:flex;align-items:center;gap:10px;margin:10px 0 6px}
+.prog-bar{flex:1;height:8px;background:var(--border);border-radius:4px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--hi));border-radius:4px;transition:width .6s ease}
+.prog-pct{font-size:.85rem;font-weight:600;color:var(--hi);flex-shrink:0}
 
 /* TRIP CARDS */
 .trip-cards{display:flex;flex-direction:column;gap:14px}
-.trip-card{background:var(--white);border-radius:var(--radius-md);border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:box-shadow .18s,transform .18s}
-.trip-card:hover{box-shadow:var(--shadow-hover);transform:translateY(-1px)}
-
-.trip-card-cover{width:100%;height:160px;background:var(--card);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-.trip-card-cover img{width:100%;height:100%;object-fit:cover;display:block}
-.cover-placeholder{display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--text-light);font-size:.78rem}
-.cover-placeholder .emoji{font-size:2.4rem}
-.cover-upload-btn{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(220,238,248,0.6);opacity:0;transition:opacity .2s;cursor:pointer}
-.trip-card-cover:hover .cover-upload-btn{opacity:1}
-.cover-upload-btn span{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:.76rem;color:var(--text)}
-.cover-upload-input{display:none}
-
-/* stamp */
-.trip-stamp{position:absolute;right:14px;top:50%;transform:translateY(-50%) rotate(-8deg);border:2px solid rgba(123,174,197,0.7);border-radius:50%;width:54px;height:54px;display:flex;align-items:center;justify-content:center;flex-direction:column;font-size:.42rem;font-weight:700;color:rgba(123,174,197,0.9);letter-spacing:.04em;text-align:center;padding:4px;line-height:1.4;pointer-events:none}
-
-.trip-card-body{padding:14px 16px}
-.trip-card-meta{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
-.trip-card-name{font-family:var(--font-serif);font-weight:700;font-size:1rem;color:var(--text)}
-.trip-card-weather{font-size:1.2rem}
-.trip-card-info{font-size:.78rem;color:var(--text-sub);display:flex;gap:12px;flex-wrap:wrap}
+.trip-card{background:var(--white);border-radius:var(--rmd);border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:box-shadow .18s,transform .18s}
+.trip-card:hover{box-shadow:var(--shh);transform:translateY(-1px)}
+.trip-cover{width:100%;height:150px;background:var(--card);display:flex;align-items:center;justify-content:center;font-size:2.8rem;position:relative;overflow:hidden}
+.trip-cover img{width:100%;height:100%;object-fit:cover}
+.trip-stamp{position:absolute;right:14px;top:50%;transform:translateY(-50%) rotate(-8deg);border:2px solid rgba(123,174,197,.75);border-radius:50%;width:52px;height:52px;display:flex;align-items:center;justify-content:center;flex-direction:column;font-size:.4rem;font-weight:700;color:rgba(123,174,197,.9);letter-spacing:.04em;text-align:center;padding:4px;line-height:1.4;pointer-events:none}
+.trip-body{padding:14px 16px}
+.trip-title{font-family:var(--serif);font-weight:700;font-size:1rem;color:var(--text);margin-bottom:3px}
+.trip-loc{font-size:.8rem;color:var(--sub);margin-bottom:3px}
+.trip-date{font-size:.74rem;color:var(--light)}
+.trip-meta{font-size:.76rem;color:var(--sub);margin-top:6px}
 
 /* PAGE HEADER */
-.page-header{margin-bottom:24px}
-.page-title{font-family:var(--font-serif);font-size:1.35rem;font-weight:700;margin-bottom:4px}
-.page-desc{font-size:.82rem;color:var(--text-sub)}
+.page-hd{margin-bottom:22px}
+.page-title{font-family:var(--serif);font-size:1.3rem;font-weight:700;margin-bottom:4px}
+.page-desc{font-size:.82rem;color:var(--sub)}
 
-/* ADD BUTTON */
-.add-trip-btn{width:100%;padding:13px;background:var(--card-blue);color:var(--highlight);border:1.5px solid var(--accent);border-radius:var(--radius-md);font-family:var(--font-serif);font-size:.95rem;font-weight:600;cursor:pointer;margin-bottom:20px;transition:background .18s;display:flex;align-items:center;justify-content:center;gap:8px}
-.add-trip-btn:hover{background:var(--accent);color:var(--white)}
+/* BUTTON */
+.btn-primary{width:100%;padding:13px;background:var(--card);color:var(--hi);border:1.5px solid var(--accent);border-radius:var(--rmd);font-family:var(--serif);font-size:.95rem;font-weight:600;cursor:pointer;margin-bottom:18px;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .18s}
+.btn-primary:hover{background:var(--accent);color:var(--white)}
+.btn-sm{padding:6px 14px;background:none;border:1px solid var(--accent);color:var(--accent);border-radius:20px;font-size:.76rem;cursor:pointer;transition:all .15s}
+.btn-sm:hover{background:var(--accent);color:var(--white)}
+.btn-danger{padding:12px;width:100%;margin-top:10px;background:none;border:1.5px solid #d0a0a0;border-radius:var(--rmd);color:var(--red);font-size:.88rem;cursor:pointer}
 
-/* PIGGY PAGE */
-.piggy-overview{background:var(--card);border-radius:var(--radius-md);border:1px solid var(--border);padding:20px;margin-bottom:20px}
-.piggy-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.piggy-label{font-size:.75rem;color:var(--text-sub);margin-bottom:4px}
-.piggy-amount{font-family:var(--font-serif);font-size:1.3rem;font-weight:700}
-.piggy-amount.main{color:var(--text)}
-.piggy-amount.profit{color:var(--profit)}
-.goal-card{background:var(--white);border-radius:var(--radius-lg);border:1.5px solid var(--border);padding:22px;margin-bottom:24px;box-shadow:var(--shadow)}
-.goal-header{display:flex;align-items:center;gap:14px;margin-bottom:18px}
-.goal-flag{font-size:2.1rem}
-.goal-name{font-family:var(--font-serif);font-size:1.15rem;font-weight:700;color:var(--text)}
-.goal-tag{font-size:.72rem;color:var(--text-sub);margin-top:2px}
-.goal-progress-wrap{display:flex;align-items:center;gap:12px;margin-bottom:16px}
-.goal-bar{flex:1;height:10px;background:var(--border);border-radius:5px;overflow:hidden}
-.goal-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--highlight));border-radius:5px}
-.goal-pct{font-size:.9rem;font-weight:700;color:var(--highlight);flex-shrink:0}
-.goal-numbers{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
-.goal-num-label{font-size:.7rem;color:var(--text-sub);margin-bottom:3px}
-.goal-num-value{font-family:var(--font-serif);font-size:1rem;font-weight:700;color:var(--text)}
-.goal-num-value.accent{color:var(--highlight)}
-.goal-note{font-size:.8rem;color:var(--text-sub);background:var(--card-warm);border-radius:var(--radius-sm);padding:10px 14px}
-.piggy-history{margin-top:8px}
-.history-list{display:flex;flex-direction:column;gap:2px}
-.history-item{display:flex;align-items:center;padding:12px 4px;border-bottom:1px solid var(--border);gap:12px}
-.history-date{font-size:.75rem;color:var(--text-light);width:52px;flex-shrink:0}
-.history-desc{flex:1;font-size:.88rem;color:var(--text)}
-.history-amt{font-family:var(--font-serif);font-size:.95rem;font-weight:600;flex-shrink:0}
-.history-amt.plus{color:var(--profit)}
-.history-amt.minus{color:var(--loss)}
+/* PIGGY */
+.piggy-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+.piggy-item{background:var(--white);border-radius:var(--rmd);border:1px solid var(--border);padding:14px}
+.piggy-label{font-size:.72rem;color:var(--sub);margin-bottom:4px}
+.piggy-val{font-family:var(--serif);font-size:1.25rem;font-weight:700;color:var(--text)}
+.piggy-val.green{color:var(--green)}
+.goal-card{background:var(--white);border-radius:var(--rlg);border:1.5px solid var(--border);padding:20px;margin-bottom:18px;box-shadow:var(--sh)}
+.goal-hd{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.goal-flag{font-size:2rem}
+.goal-name{font-family:var(--serif);font-size:1.1rem;font-weight:700}
+.goal-tag{font-size:.7rem;color:var(--sub);margin-top:2px}
+.goal-nums{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.goal-num-label{font-size:.68rem;color:var(--sub);margin-bottom:2px}
+.goal-num-val{font-family:var(--serif);font-size:.95rem;font-weight:700;color:var(--text)}
+.goal-num-val.accent{color:var(--hi)}
+.goal-note{font-size:.78rem;color:var(--sub);background:var(--warm);border-radius:var(--rsm);padding:8px 12px;margin-top:12px}
+.hist-list{display:flex;flex-direction:column;gap:2px}
+.hist-item{display:flex;align-items:center;padding:11px 4px;border-bottom:1px solid var(--border);gap:10px;cursor:pointer}
+.hist-item:last-child{border-bottom:none}
+.hist-date{font-size:.72rem;color:var(--light);width:58px;flex-shrink:0}
+.hist-info{flex:1}
+.hist-type{font-size:.84rem;color:var(--text)}
+.hist-note{font-size:.7rem;color:var(--sub)}
+.hist-amt{font-family:var(--serif);font-size:.92rem;font-weight:600;flex-shrink:0}
+.hist-amt.plus{color:var(--green)}.hist-amt.minus{color:var(--red)}
 
-/* MAP PAGE */
-.map-wrap{display:flex;flex-direction:column;align-items:center;gap:16px;margin-bottom:24px}
-.tw-map{width:100%;max-width:260px;filter:drop-shadow(0 4px 16px rgba(100,100,80,0.12))}
+/* MAP */
+.map-wrap{display:flex;flex-direction:column;align-items:center;gap:14px;margin-bottom:20px}
+.tw-map{width:100%;max-width:240px;filter:drop-shadow(0 4px 16px rgba(80,120,150,.14))}
 .tw-land{fill:var(--card);stroke:var(--border);stroke-width:1.5}
-.map-pin{cursor:pointer}
-.map-pin:not(.visited){opacity:.3;cursor:default}
-.pin-circle{fill:var(--bg);stroke:var(--border);stroke-width:1.5;transition:fill .18s,stroke .18s}
-.map-pin.visited .pin-circle{fill:var(--accent);stroke:var(--highlight)}
-.pin-label{text-anchor:middle;font-size:7.5px;fill:var(--white);font-weight:700;pointer-events:none;dominant-baseline:auto}
-.map-pin:not(.visited) .pin-label{fill:var(--text-sub)}
-.map-legend{display:flex;gap:16px;font-size:.78rem;color:var(--text-sub);align-items:center}
-.legend-dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px}
-.legend-dot.visited{background:var(--accent)}
-.legend-dot.unvisited{background:var(--border)}
-.city-popup{background:var(--white);border-radius:var(--radius-md);border:1px solid var(--border);padding:20px;position:relative;box-shadow:var(--shadow-hover);margin-top:8px}
+.map-pin{cursor:pointer}.map-pin:not(.visited){opacity:.28;cursor:default}
+.pin-circle{fill:var(--bg);stroke:var(--border);stroke-width:1.5;transition:fill .18s}
+.map-pin.visited .pin-circle{fill:var(--accent);stroke:var(--hi)}
+.pin-label{text-anchor:middle;font-size:7px;fill:var(--white);font-weight:700;pointer-events:none;dominant-baseline:auto}
+.map-pin:not(.visited) .pin-label{fill:var(--sub)}
+.map-legend{display:flex;gap:14px;font-size:.76rem;color:var(--sub);align-items:center}
+.ldot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:4px}
+.ldot.v{background:var(--accent)}.ldot.u{background:var(--border)}
+.city-popup{background:var(--white);border-radius:var(--rmd);border:1px solid var(--border);padding:18px;position:relative;box-shadow:var(--shh);margin-top:10px}
 .city-popup.hidden{display:none}
-.popup-close{position:absolute;top:12px;right:14px;background:none;border:none;font-size:1rem;color:var(--text-sub);cursor:pointer}
-.popup-trip-name{font-family:var(--font-serif);font-size:1rem;font-weight:700;margin-bottom:6px}
-.popup-meta{font-size:.8rem;color:var(--text-sub);margin-bottom:12px}
-.popup-view-btn{background:var(--card-blue);color:var(--highlight);border:1px solid var(--accent);border-radius:20px;padding:8px 18px;font-size:.82rem;cursor:pointer;transition:background .18s;font-weight:600}
-.popup-view-btn:hover{background:var(--accent);color:var(--white)}
+.popup-close{position:absolute;top:10px;right:12px;background:none;border:none;font-size:.95rem;color:var(--sub);cursor:pointer}
+.popup-trip-name{font-family:var(--serif);font-size:.95rem;font-weight:700;margin-bottom:4px}
+.popup-meta{font-size:.78rem;color:var(--sub);margin-bottom:10px}
+.popup-btn{background:var(--card);color:var(--hi);border:1px solid var(--accent);border-radius:20px;padding:7px 16px;font-size:.8rem;cursor:pointer;font-weight:600}
+.popup-btn:hover{background:var(--accent);color:var(--white)}
 
-/* MODAL */
+/* MODAL BASE */
 .modal{position:fixed;inset:0;z-index:200;display:flex;align-items:flex-end}
 .modal.hidden{display:none}
-.modal-overlay{position:absolute;inset:0;background:rgba(80,80,60,0.35);backdrop-filter:blur(2px)}
-.modal-box{position:relative;z-index:1;background:var(--white);border-radius:var(--radius-lg) var(--radius-lg) 0 0;width:100%;max-height:92vh;overflow-y:auto;padding:28px 20px 44px;animation:slideUp .26s ease}
+.modal-overlay{position:absolute;inset:0;background:rgba(60,80,90,.38);backdrop-filter:blur(2px)}
+.modal-box{position:relative;z-index:1;background:var(--white);border-radius:var(--rlg) var(--rlg) 0 0;width:100%;max-height:93vh;overflow-y:auto;padding:28px 20px 48px;animation:slideUp .26s ease}
 @keyframes slideUp{from{transform:translateY(100%);opacity:0}to{transform:translateY(0);opacity:1}}
-.modal-close{position:absolute;top:16px;right:18px;background:var(--card);border:none;border-radius:50%;width:32px;height:32px;font-size:1rem;color:var(--text-sub);cursor:pointer;display:flex;align-items:center;justify-content:center}
-.modal-trip-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:6px}
-.modal-trip-name{font-family:var(--font-serif);font-size:1.35rem;font-weight:700;color:var(--text);flex:1}
-.modal-weather{font-size:1.8rem}
-.modal-meta{font-size:.78rem;color:var(--text-sub);display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap}
-.modal-section{margin-bottom:22px}
-.modal-section-title{font-size:.74rem;font-weight:600;color:var(--text-sub);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px}
+.modal-close{position:absolute;top:16px;right:18px;background:var(--card);border:none;border-radius:50%;width:32px;height:32px;font-size:1rem;color:var(--sub);cursor:pointer;display:flex;align-items:center;justify-content:center}
+.modal-title{font-family:var(--serif);font-size:1.15rem;font-weight:700;color:var(--text);margin-bottom:20px}
 
-/* PHOTO WALL */
-.photo-wall{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:4px}
-.photo-wall-item{aspect-ratio:1;border-radius:var(--radius-sm);background:var(--card);overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative;cursor:pointer}
-.photo-wall-item img{width:100%;height:100%;object-fit:cover;display:block}
-.photo-wall-add{border:1.5px dashed var(--border);background:var(--card);flex-direction:column;gap:4px;color:var(--text-light);font-size:.7rem;cursor:pointer;aspect-ratio:1;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center}
-.photo-wall-add:hover{border-color:var(--accent);color:var(--accent)}
-.photo-wall-add .plus{font-size:1.4rem;line-height:1}
-.photo-wall-input{display:none}
+/* TRIP DETAIL MODAL */
+.detail-hd{margin-bottom:18px}
+.detail-trip-name{font-family:var(--serif);font-size:1.3rem;font-weight:700;color:var(--text);margin-bottom:4px}
+.detail-loc{font-size:.9rem;color:var(--sub);margin-bottom:2px}
+.detail-date{font-size:.8rem;color:var(--light);margin-bottom:10px}
+.detail-meta{display:flex;gap:14px;font-size:.78rem;color:var(--sub);flex-wrap:wrap;margin-bottom:16px}
+.detail-edit-btn{padding:9px 20px;background:var(--card);border:1px solid var(--border);border-radius:var(--rsm);font-size:.84rem;cursor:pointer;color:var(--text);margin-bottom:18px}
 
-/* SPOT TAGS */
-.spot-tags{display:flex;flex-wrap:wrap;gap:8px}
-.spot-tag{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:4px 12px;font-size:.8rem}
+/* DAY ACCORDION */
+.day-list{display:flex;flex-direction:column;gap:8px}
+.day-item{border:1px solid var(--border);border-radius:var(--rmd);overflow:hidden}
+.day-toggle{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;cursor:pointer;background:var(--white);user-select:none}
+.day-toggle:hover{background:var(--card)}
+.day-toggle-label{font-family:var(--serif);font-size:.9rem;font-weight:600;color:var(--text)}
+.day-toggle-weather{font-size:1rem;margin-right:8px}
+.day-toggle-arrow{font-size:.7rem;color:var(--sub);transition:transform .2s}
+.day-toggle.open .day-toggle-arrow{transform:rotate(180deg)}
+.day-content{display:none;padding:16px;border-top:1px solid var(--border);background:var(--bg)}
+.day-content.open{display:block}
 
-/* SUB CARDS */
-.sub-cards{display:flex;flex-direction:column;gap:12px}
-.sub-card{background:var(--card);border-radius:var(--radius-sm);padding:14px;border:1px solid var(--border)}
-.sub-card-name{font-weight:600;font-size:.92rem;margin-bottom:2px}
-.sub-card-tag{font-size:.7rem;color:var(--text-sub);margin-bottom:6px}
-.sub-card-picker{font-size:.72rem;color:var(--text-sub);margin-bottom:10px;padding-top:2px}
-.sub-card-ratings{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+/* DAY CONTENT SECTIONS */
+.day-section{margin-bottom:16px}
+.day-sec-title{font-size:.72rem;font-weight:600;color:var(--sub);letter-spacing:.05em;text-transform:uppercase;margin-bottom:8px}
+.spot-tags{display:flex;flex-wrap:wrap;gap:7px}
+.spot-tag{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:3px 11px;font-size:.78rem}
+.food-card{background:var(--white);border:1px solid var(--border);border-radius:var(--rsm);padding:12px;margin-bottom:8px}
+.food-name{font-weight:600;font-size:.9rem;margin-bottom:2px}
+.food-meta{font-size:.7rem;color:var(--sub);margin-bottom:8px}
+.food-ratings{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
 .rating-row{display:flex;flex-direction:column}
-.rating-label{font-size:.68rem;color:var(--text-light);margin-bottom:1px}
-.stars{color:var(--accent);font-size:.85rem;letter-spacing:1px}
-.notes-box{background:var(--card);border-radius:var(--radius-sm);padding:12px 14px;font-size:.85rem;color:var(--text);line-height:1.65}
+.rating-label{font-size:.65rem;color:var(--light);margin-bottom:1px}
+.stars{color:var(--accent);font-size:.8rem;letter-spacing:1px}
+.stay-card{background:var(--white);border:1px solid var(--border);border-radius:var(--rsm);padding:12px}
+.stay-name{font-weight:600;font-size:.9rem;margin-bottom:8px}
+.stay-ratings{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.notes-box{background:var(--card);border-radius:var(--rsm);padding:10px 14px;font-size:.84rem;color:var(--text);line-height:1.65}
+.photo-placeholder{border:1.5px dashed var(--border);border-radius:var(--rsm);padding:16px;text-align:center;font-size:.76rem;color:var(--light)}
 
-/* ADD FORM MODAL */
+/* FORM MODAL */
 .form-modal{position:fixed;inset:0;z-index:300;display:flex;align-items:flex-end}
 .form-modal.hidden{display:none}
-.form-overlay{position:absolute;inset:0;background:rgba(80,80,60,0.35);backdrop-filter:blur(2px)}
-.form-box{position:relative;z-index:1;background:var(--white);border-radius:var(--radius-lg) var(--radius-lg) 0 0;width:100%;max-height:94vh;overflow-y:auto;padding:28px 20px 52px;animation:slideUp .26s ease}
-.form-title{font-family:var(--font-serif);font-size:1.2rem;font-weight:700;color:var(--text);margin-bottom:22px}
-.form-close{position:absolute;top:16px;right:18px;background:var(--card);border:none;border-radius:50%;width:32px;height:32px;font-size:1rem;color:var(--text-sub);cursor:pointer;display:flex;align-items:center;justify-content:center}
-
-/* FORM FIELDS */
-.form-group{margin-bottom:18px}
-.form-label{display:block;font-size:.78rem;font-weight:600;color:var(--text-sub);letter-spacing:.04em;margin-bottom:6px}
-.form-input{width:100%;padding:11px 14px;background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:var(--font-body);font-size:.88rem;color:var(--text);transition:border-color .18s;appearance:none;-webkit-appearance:none}
-.form-input:focus{outline:none;border-color:var(--accent);background:var(--white)}
-.form-input::placeholder{color:var(--text-light)}
-textarea.form-input{resize:vertical;min-height:80px;line-height:1.6}
+.form-overlay{position:absolute;inset:0;background:rgba(60,80,90,.38);backdrop-filter:blur(2px)}
+.form-box{position:relative;z-index:1;background:var(--white);border-radius:var(--rlg) var(--rlg) 0 0;width:100%;max-height:94vh;overflow-y:auto;padding:28px 20px 52px;animation:slideUp .26s ease}
+.form-title{font-family:var(--serif);font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:20px}
+.form-close{position:absolute;top:16px;right:18px;background:var(--card);border:none;border-radius:50%;width:32px;height:32px;font-size:1rem;color:var(--sub);cursor:pointer;display:flex;align-items:center;justify-content:center}
+.form-group{margin-bottom:16px}
+.form-label{display:block;font-size:.76rem;font-weight:600;color:var(--sub);letter-spacing:.04em;margin-bottom:5px}
+.form-input{width:100%;padding:10px 13px;background:var(--white);border:1.5px solid var(--border);border-radius:var(--rsm);font-family:var(--body);font-size:.88rem;color:var(--text);transition:border-color .18s;appearance:none;-webkit-appearance:none}
+.form-input:focus{outline:none;border-color:var(--accent)}
+.form-input::placeholder{color:var(--light)}
+textarea.form-input{resize:vertical;min-height:76px;line-height:1.6}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.form-divider{border:none;border-top:1px solid var(--border);margin:18px 0}
+.form-submit{width:100%;padding:13px;background:var(--card);color:var(--hi);border:1.5px solid var(--accent);border-radius:var(--rmd);font-family:var(--serif);font-size:.95rem;font-weight:600;cursor:pointer;margin-top:6px;transition:background .18s}
+.form-submit:hover{background:var(--accent);color:var(--white)}
 
 /* WEATHER PICKER */
-.weather-picker{display:flex;gap:8px;flex-wrap:wrap}
-.weather-btn{background:var(--white);border:1.5px solid var(--border);border-radius:20px;padding:7px 14px;font-size:.88rem;cursor:pointer;color:var(--text);transition:all .15s}
-.weather-btn.selected{background:var(--card);color:var(--highlight);border-color:var(--accent)}
+.weather-picker{display:flex;gap:7px;flex-wrap:wrap}
+.w-btn{background:var(--white);border:1.5px solid var(--border);border-radius:20px;padding:6px 12px;font-size:.86rem;cursor:pointer;color:var(--text);transition:all .15s}
+.w-btn.sel{background:var(--card);color:var(--hi);border-color:var(--accent)}
 
-/* WHO PICKED PICKER */
-.who-picker{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
-.who-btn{background:var(--white);border:1.5px solid var(--border);border-radius:20px;padding:6px 12px;font-size:.82rem;cursor:pointer;color:var(--text);transition:all .15s}
-.who-btn.selected{background:var(--card);color:var(--highlight);border-color:var(--accent)}
+/* WHO PICKER */
+.who-picker{display:flex;gap:7px;flex-wrap:wrap;margin-top:4px}
+.who-btn{background:var(--white);border:1.5px solid var(--border);border-radius:20px;padding:5px 11px;font-size:.8rem;cursor:pointer;color:var(--text);transition:all .15s}
+.who-btn.sel{background:var(--card);color:var(--hi);border-color:var(--accent)}
 
-/* PHOTO UPLOAD */
-.photo-upload-area{border:2px dashed var(--border);border-radius:var(--radius-md);padding:20px;text-align:center;cursor:pointer;transition:border-color .18s,background .18s;background:var(--card)}
-.photo-upload-area:hover{border-color:var(--accent);background:var(--white)}
-.photo-upload-icon{font-size:1.8rem;margin-bottom:6px}
-.photo-upload-text{font-size:.8rem;color:var(--text-sub)}
-.photo-upload-input{display:none}
-.form-photo-preview{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px}
-.form-photo-item{aspect-ratio:1;border-radius:var(--radius-sm);overflow:hidden;position:relative}
-.form-photo-item img{width:100%;height:100%;object-fit:cover}
-.form-photo-remove{position:absolute;top:4px;right:4px;background:rgba(80,80,60,.65);color:#fff;border:none;border-radius:50%;width:20px;height:20px;font-size:.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
+/* STAY RADIO */
+.stay-radio{display:flex;gap:10px;margin-bottom:12px}
+.stay-radio label{display:flex;align-items:center;gap:5px;font-size:.84rem;color:var(--text);cursor:pointer}
 
-/* SUBFORM */
-.subform-section{margin-bottom:14px}
-.subform-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-.subform-title{font-size:.82rem;font-weight:600;color:var(--text)}
-.subform-add-btn{background:none;border:1px solid var(--accent);color:var(--highlight);border-radius:20px;padding:4px 12px;font-size:.76rem;cursor:pointer;transition:background .15s,color .15s}
-.subform-add-btn:hover{background:var(--accent);color:var(--white)}
-.subform-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px;margin-bottom:10px}
-.subform-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.star-input{display:flex;gap:4px;margin-top:4px}
-.star-input button{background:none;border:none;font-size:1.1rem;cursor:pointer;color:var(--border);transition:color .12s;padding:0}
+/* STAR INPUT */
+.star-input{display:flex;gap:3px;margin-top:3px}
+.star-input button{background:none;border:none;font-size:1.05rem;cursor:pointer;color:var(--border);transition:color .12s;padding:0}
 .star-input button.on{color:var(--accent)}
 
-/* FORM SUBMIT */
-.form-submit{width:100%;padding:14px;background:var(--card-blue);color:var(--highlight);border:1.5px solid var(--accent);border-radius:var(--radius-md);font-family:var(--font-serif);font-size:1rem;font-weight:600;cursor:pointer;margin-top:8px;transition:background .18s}
-.form-submit:hover{background:var(--accent);color:var(--white)}
-.form-divider{border:none;border-top:1px solid var(--border);margin:20px 0}
+/* SUBFORM */
+.subform-card{background:var(--card);border:1px solid var(--border);border-radius:var(--rsm);padding:13px;margin-bottom:10px}
+.subform-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.subform-title{font-size:.8rem;font-weight:600;color:var(--text)}
+.subform-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+/* DAY FORM SECTION */
+.day-form-section{border:1px solid var(--border);border-radius:var(--rmd);overflow:hidden;margin-bottom:10px}
+.day-form-hd{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;background:var(--card);font-size:.84rem;font-weight:600;color:var(--text)}
+.day-form-body{padding:14px;border-top:1px solid var(--border)}
+
+/* PHOTO NOTE */
+.photo-note{font-size:.74rem;color:var(--light);padding:8px;background:var(--card);border-radius:var(--rsm);text-align:center}
 
 @media(min-width:640px){
   .container{padding:32px 24px}
-  .hero-title{font-size:1.9rem}
-  .modal-box,.form-box{max-width:560px;margin:auto;border-radius:var(--radius-lg);align-self:center}
+  .hero-title{font-size:1.85rem}
+  .modal-box,.form-box{max-width:560px;margin:auto;border-radius:var(--rlg);align-self:center}
   .modal,.form-modal{align-items:center;padding:24px}
 }
 </style>
@@ -286,67 +257,74 @@ textarea.form-input{resize:vertical;min-height:80px;line-height:1.6}
   </div>
 </nav>
 
-<!-- HOME -->
+<!-- ═══ HOME ═══ -->
 <main id="page-home" class="page active">
   <div class="container">
     <section class="hero">
       <p class="hero-sub">把喜歡的地方，慢慢收集起來</p>
       <h1 class="hero-title">🎒 我們的旅行手帳</h1>
     </section>
-    <!-- 1. 旅行基金進度 -->
-    <section style="margin-bottom:20px">
-      <div class="section-label">💰 旅行基金進度</div>
-      <div class="next-trip-card" style="cursor:pointer" onclick="goTo('piggy')">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-          <div style="font-size:.88rem;color:var(--text)">本金 <strong>$50,000</strong></div>
-          <div style="font-size:.88rem;color:var(--profit);font-weight:600">獲利 + $8,000</div>
+
+    <!-- 1. 旅行基金 -->
+    <section style="margin-bottom:18px">
+      <div class="sec-label">💰 旅行基金</div>
+      <div class="card" style="cursor:pointer;padding:16px" onclick="goTo('piggy')">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+          <div>
+            <div style="font-size:.74rem;color:var(--sub);margin-bottom:3px">旅行基金累積</div>
+            <div style="font-family:var(--serif);font-size:1.3rem;font-weight:700;color:var(--green)" id="home-fund-total">計算中…</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:.74rem;color:var(--sub);margin-bottom:3px">本金</div>
+            <div style="font-size:.9rem;font-weight:600;color:var(--text)">$50,000</div>
+          </div>
         </div>
-        <div class="trip-progress-row" style="margin-bottom:6px">
-          <div class="trip-progress-bar"><div class="trip-progress-fill" style="width:26.6%"></div></div>
-          <div class="trip-progress-pct">26.6%</div>
+        <div class="prog-wrap" style="margin-top:0">
+          <div class="prog-bar"><div class="prog-fill" id="home-fund-fill" style="width:0%"></div></div>
+          <div class="prog-pct" id="home-fund-pct">0%</div>
         </div>
-        <div style="font-size:.76rem;color:var(--text-sub);text-align:right">查看明細 →</div>
+        <div style="font-size:.74rem;color:var(--sub);text-align:right;margin-top:4px">查看明細 →</div>
       </div>
     </section>
 
     <!-- 2. 下一次旅行目標 -->
-    <section style="margin-bottom:20px">
-      <div class="section-label">✈️ 下一次旅行目標</div>
-      <div class="next-trip-card">
-        <div class="trip-destination">🇯🇵 日本大阪</div>
-        <div class="trip-progress-row">
-          <div class="trip-progress-bar"><div class="trip-progress-fill" style="width:26.6%"></div></div>
-          <div class="trip-progress-pct">26.6%</div>
+    <section style="margin-bottom:18px">
+      <div class="sec-label">✈️ 下一次旅行目標</div>
+      <div class="card" style="padding:16px">
+        <div style="font-family:var(--serif);font-size:1.15rem;font-weight:700;margin-bottom:12px">🇯🇵 日本大阪</div>
+        <div class="prog-wrap">
+          <div class="prog-bar"><div class="prog-fill" id="home-goal-fill" style="width:0%"></div></div>
+          <div class="prog-pct" id="home-goal-pct">0%</div>
         </div>
-        <div class="trip-amounts">
-          <span>已存 <strong>$8,000</strong></span>
-          <span>目標 <strong>$30,000</strong></span>
+        <div style="display:flex;justify-content:space-between;font-size:.8rem;color:var(--sub)">
+          <span>已存 <strong id="home-goal-saved" style="color:var(--text)">$0</strong></span>
+          <span>目標 <strong style="color:var(--text)">$30,000</strong></span>
         </div>
       </div>
     </section>
 
-    <!-- 3. 旅行足跡（唯一城市數） -->
-    <section style="margin-bottom:20px">
-      <div class="section-label">🗺️ 旅行足跡</div>
-      <div class="next-trip-card" style="cursor:pointer" onclick="goTo('map')">
+    <!-- 3. 旅行足跡 -->
+    <section style="margin-bottom:18px">
+      <div class="sec-label">🗺️ 旅行足跡</div>
+      <div class="card" style="cursor:pointer;padding:16px" onclick="goTo('map')">
         <div style="display:flex;align-items:center;justify-content:space-between">
           <div>
-            <div style="font-family:var(--font-serif);font-size:1.3rem;font-weight:700;color:var(--text)">
-              <span id="home-city-count">—</span>
-              <span style="font-family:var(--font-body);font-size:.78rem;font-weight:400;color:var(--text-sub)"> 個城市</span>
+            <div style="font-family:var(--serif);font-size:1.25rem;font-weight:700;color:var(--text)">
+              <span id="home-place-count">0</span>
+              <span style="font-size:.76rem;font-weight:400;color:var(--sub)"> 個地方</span>
             </div>
-            <div style="font-size:.76rem;color:var(--text-sub);margin-top:4px" id="home-city-list">載入中…</div>
+            <div style="font-size:.74rem;color:var(--sub);margin-top:4px" id="home-place-list">還沒有旅行紀錄</div>
           </div>
           <div style="font-size:1.8rem">🗺️</div>
         </div>
-        <div style="font-size:.76rem;color:var(--text-sub);text-align:right;margin-top:10px">查看地圖 →</div>
+        <div style="font-size:.74rem;color:var(--sub);text-align:right;margin-top:10px">查看地圖 →</div>
       </div>
     </section>
 
     <!-- 4. 最近旅行 -->
     <section>
-      <div class="section-header">
-        <div class="section-label">📸 最近旅行</div>
+      <div class="sec-header">
+        <div class="sec-label">📸 最近旅行</div>
         <button class="link-btn" onclick="goTo('records')">全部 →</button>
       </div>
       <div class="trip-cards" id="home-cards"></div>
@@ -354,778 +332,880 @@ textarea.form-input{resize:vertical;min-height:80px;line-height:1.6}
   </div>
 </main>
 
-<!-- PIGGY -->
+<!-- ═══ PIGGY ═══ -->
 <main id="page-piggy" class="page">
   <div class="container">
-    <div class="page-header">
+    <div class="page-hd">
       <h2 class="page-title">✈️ 旅行基金</h2>
       <p class="page-desc">用股票收益存旅行基金，收益達標就出發！</p>
     </div>
-    <div class="piggy-overview">
-      <div class="piggy-row">
-        <div><div class="piggy-label">本金</div><div class="piggy-amount main">$50,000</div></div>
-        <div><div class="piggy-label">目前股票獲利</div><div class="piggy-amount profit">+ $8,000</div></div>
-      </div>
+    <div class="piggy-row">
+      <div class="piggy-item"><div class="piggy-label">本金</div><div class="piggy-val">$50,000</div></div>
+      <div class="piggy-item"><div class="piggy-label">旅行基金累積</div><div class="piggy-val green" id="piggy-total">$0</div></div>
     </div>
     <div class="goal-card">
-      <div class="goal-header">
+      <div class="goal-hd">
         <div class="goal-flag">🇯🇵</div>
         <div><div class="goal-name">日本大阪</div><div class="goal-tag">下一次旅行目標</div></div>
       </div>
-      <div class="goal-progress-wrap">
-        <div class="goal-bar"><div class="goal-fill" style="width:26.6%"></div></div>
-        <div class="goal-pct">26.6%</div>
+      <div class="prog-wrap">
+        <div class="prog-bar"><div class="prog-fill" id="piggy-fill" style="width:0%"></div></div>
+        <div class="prog-pct" id="piggy-pct">0%</div>
       </div>
-      <div class="goal-numbers">
-        <div><div class="goal-num-label">目標金額</div><div class="goal-num-value">$30,000</div></div>
-        <div><div class="goal-num-label">已存金額</div><div class="goal-num-value accent">$8,000</div></div>
-        <div><div class="goal-num-label">還差</div><div class="goal-num-value">$22,000</div></div>
+      <div class="goal-nums">
+        <div><div class="goal-num-label">目標金額</div><div class="goal-num-val">$30,000</div></div>
+        <div><div class="goal-num-label">已累積</div><div class="goal-num-val accent" id="piggy-saved">$0</div></div>
+        <div><div class="goal-num-label">還差</div><div class="goal-num-val" id="piggy-remain">$30,000</div></div>
       </div>
       <div class="goal-note">繼續讓收益跑吧，大阪等著我們 ✈️</div>
     </div>
-    <div class="piggy-history">
-      <div class="section-label">紀錄</div>
-      <div class="history-list">
-        <div class="history-item"><div class="history-date">2025.03</div><div class="history-desc">股息入帳</div><div class="history-amt plus">+ $3,200</div></div>
-        <div class="history-item"><div class="history-date">2025.01</div><div class="history-desc">價差獲利</div><div class="history-amt plus">+ $4,800</div></div>
-        <div class="history-item"><div class="history-date">2024.12</div><div class="history-desc">台南旅行花費</div><div class="history-amt minus">- $5,500</div></div>
-      </div>
-    </div>
+    <button class="btn-primary" onclick="openFundForm()">＋ 新增基金紀錄</button>
+    <div class="sec-label">紀錄明細</div>
+    <div class="hist-list" id="fund-list"></div>
   </div>
 </main>
 
-<!-- MAP -->
+<!-- ═══ MAP ═══ -->
 <main id="page-map" class="page">
   <div class="container">
-    <div class="page-header">
+    <div class="page-hd">
       <h2 class="page-title">🗺️ 我們去過的地方</h2>
       <p class="page-desc">點擊城市看旅行紀錄</p>
     </div>
+    <div id="map-region-list" style="margin-bottom:16px"></div>
     <div class="map-wrap">
       <svg class="tw-map" viewBox="0 0 220 380" xmlns="http://www.w3.org/2000/svg">
         <path class="tw-land" d="M 110 15 C 125 12,145 20,155 40 C 165 60,168 90,162 120 C 170 140,172 160,165 185 C 175 205,178 230,170 260 C 160 285,140 310,120 330 C 100 345,80 350,65 340 C 50 328,45 305,55 280 C 45 255,42 225,50 200 C 40 175,38 150,48 125 C 42 100,44 75,55 55 C 68 32,90 18,110 15 Z"/>
-        <g class="map-pin"><circle cx="108" cy="60" r="10" class="pin-circle"/><text x="108" y="65" class="pin-label">台北</text></g>
-        <g class="map-pin visited" onclick="showCityTrip('taichung')"><circle cx="90" cy="170" r="11" class="pin-circle"/><text x="90" y="175" class="pin-label">台中</text></g>
-        <g class="map-pin visited" onclick="showCityTrip('chiayi')"><circle cx="85" cy="225" r="11" class="pin-circle"/><text x="85" y="230" class="pin-label">嘉義</text></g>
-        <g class="map-pin visited" onclick="showCityTrip('tainan')"><circle cx="80" cy="278" r="11" class="pin-circle"/><text x="80" y="283" class="pin-label">台南</text></g>
-        <g class="map-pin visited" onclick="showCityTrip('kaohsiung')"><circle cx="85" cy="318" r="11" class="pin-circle"/><text x="85" y="323" class="pin-label">高雄</text></g>
+        <g class="map-pin" id="pin-taipei"><circle cx="108" cy="60" r="10" class="pin-circle"/><text x="108" y="65" class="pin-label">台北</text></g>
+        <g class="map-pin" id="pin-taichung" onclick="showRegion('台中')"><circle cx="90" cy="170" r="11" class="pin-circle"/><text x="90" y="175" class="pin-label">台中</text></g>
+        <g class="map-pin" id="pin-chiayi" onclick="showRegion('嘉義')"><circle cx="85" cy="225" r="11" class="pin-circle"/><text x="85" y="230" class="pin-label">嘉義</text></g>
+        <g class="map-pin" id="pin-tainan" onclick="showRegion('台南')"><circle cx="80" cy="278" r="11" class="pin-circle"/><text x="80" y="283" class="pin-label">台南</text></g>
+        <g class="map-pin" id="pin-kaohsiung" onclick="showRegion('高雄')"><circle cx="85" cy="318" r="11" class="pin-circle"/><text x="85" y="323" class="pin-label">高雄</text></g>
       </svg>
       <div class="map-legend">
-        <span class="legend-dot visited"></span>已去過
-        <span class="legend-dot unvisited"></span>還沒去
+        <span class="ldot v"></span>已去過
+        <span class="ldot u"></span>還沒去
       </div>
     </div>
-    <div id="city-popup" class="city-popup hidden">
-      <button class="popup-close" onclick="closeCityPopup()">✕</button>
-      <div id="popup-content"></div>
+    <div id="map-popup" class="city-popup hidden">
+      <button class="popup-close" onclick="document.getElementById('map-popup').classList.add('hidden')">✕</button>
+      <div id="map-popup-content"></div>
     </div>
   </div>
 </main>
 
-<!-- RECORDS -->
+<!-- ═══ RECORDS ═══ -->
 <main id="page-records" class="page">
   <div class="container">
-    <div class="page-header"><h2 class="page-title">📸 旅行紀錄</h2></div>
-    <button class="add-trip-btn" onclick="openAddForm()">＋ 新增旅行</button>
+    <div class="page-hd"><h2 class="page-title">📸 旅行紀錄</h2></div>
+    <button class="btn-primary" onclick="openTripForm()">＋ 新增旅行</button>
     <div class="trip-cards" id="all-cards"></div>
   </div>
 </main>
 
-<!-- DETAIL MODAL -->
+<!-- ═══ TRIP DETAIL MODAL ═══ -->
 <div id="trip-modal" class="modal hidden">
-  <div class="modal-overlay" onclick="closeModal()"></div>
+  <div class="modal-overlay" onclick="closeModal('trip-modal')"></div>
   <div class="modal-box">
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <div id="modal-content"></div>
+    <button class="modal-close" onclick="closeModal('trip-modal')">✕</button>
+    <div id="trip-detail-content"></div>
   </div>
 </div>
 
-<!-- ADD FORM MODAL -->
-<div id="add-form-modal" class="form-modal hidden">
-  <div class="form-overlay" onclick="closeAddForm()"></div>
+<!-- ═══ TRIP FORM MODAL ═══ -->
+<div id="trip-form-modal" class="form-modal hidden">
+  <div class="form-overlay" onclick="closeModal('trip-form-modal')"></div>
   <div class="form-box">
-    <button class="form-close" onclick="closeAddForm()">✕</button>
-    <div class="form-title">＋ 新增旅行紀錄</div>
+    <button class="form-close" onclick="closeModal('trip-form-modal')">✕</button>
+    <div class="form-title" id="trip-form-title">＋ 新增旅行</div>
+    <input type="hidden" id="tf-id"/>
 
     <div class="form-group">
-      <label class="form-label">旅行名稱</label>
-      <input class="form-input" id="f-name" type="text" placeholder="例：台南老城漫走"/>
+      <label class="form-label">旅行名稱 <span style="color:var(--light);font-weight:400">（選填）</span></label>
+      <input class="form-input" id="tf-name" type="text" placeholder="例：第一次一起出國"/>
     </div>
     <div class="form-group">
-      <label class="form-label">日期</label>
-      <input class="form-input" id="f-date" type="date"/>
+      <label class="form-label">國家 <span style="color:var(--red)">*</span></label>
+      <input class="form-input" id="tf-country" type="text" placeholder="例：日本"/>
     </div>
     <div class="form-group">
-      <label class="form-label">城市</label>
-      <input class="form-input" id="f-city" type="text" placeholder="例：台南"/>
+      <label class="form-label">旅行區域 <span style="color:var(--red)">*</span></label>
+      <input class="form-input" id="tf-region" type="text" placeholder="例：大阪、京都"/>
     </div>
-    <div class="form-group">
-      <label class="form-label">去過的地點（用逗號分隔）</label>
-      <input class="form-input" id="f-spots" type="text" placeholder="例：赤崁樓, 安平古堡, 神農街"/>
-    </div>
-    <div class="form-group">
-      <label class="form-label">大約花費（元）</label>
-      <input class="form-input" id="f-cost" type="number" placeholder="例：5500"/>
-    </div>
-    <div class="form-group">
-      <label class="form-label">天氣</label>
-      <div class="weather-picker" id="f-weather-picker">
-        <button class="weather-btn" data-w="☀️" onclick="pickWeather(this)">☀️ 晴</button>
-        <button class="weather-btn" data-w="⛅" onclick="pickWeather(this)">⛅ 多雲</button>
-        <button class="weather-btn" data-w="☁️" onclick="pickWeather(this)">☁️ 陰</button>
-        <button class="weather-btn" data-w="🌧" onclick="pickWeather(this)">🌧 雨</button>
-        <button class="weather-btn" data-w="⛈" onclick="pickWeather(this)">⛈ 雷雨</button>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">開始日期 <span style="color:var(--red)">*</span></label>
+        <input class="form-input" id="tf-start" type="date"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">結束日期 <span style="color:var(--red)">*</span></label>
+        <input class="form-input" id="tf-end" type="date"/>
       </div>
     </div>
+    <div class="form-group">
+      <label class="form-label">總花費 <span style="color:var(--light);font-weight:400">（元）</span></label>
+      <input class="form-input" id="tf-cost" type="number" placeholder="例：25000"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">封面照片</label>
+      <div class="photo-note">📷 照片功能開發中，串接 Google Drive 後可上傳</div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">整趟旅行備註</label>
+      <textarea class="form-input" id="tf-notes" placeholder="整趟旅行的感受、總結…"></textarea>
+    </div>
+
+    <hr class="form-divider"/>
+    <div style="font-size:.82rem;color:var(--sub);margin-bottom:14px">每日紀錄會依日期區間自動產生，儲存後可個別填寫。</div>
+
+    <button class="form-submit" onclick="submitTrip()">儲存旅行</button>
+    <button id="tf-delete-btn" class="btn-danger" onclick="confirmDeleteTrip()" style="display:none">刪除這趟旅行</button>
+  </div>
+</div>
+
+<!-- ═══ DAY EDIT MODAL ═══ -->
+<div id="day-form-modal" class="form-modal hidden">
+  <div class="form-overlay" onclick="closeModal('day-form-modal')"></div>
+  <div class="form-box">
+    <button class="form-close" onclick="closeModal('day-form-modal')">✕</button>
+    <div class="form-title" id="day-form-title">Day 1 紀錄</div>
+    <input type="hidden" id="df-trip-id"/>
+    <input type="hidden" id="df-day-idx"/>
+
+    <!-- 天氣 -->
+    <div class="form-group">
+      <label class="form-label">天氣</label>
+      <div class="weather-picker" id="df-weather">
+        <button class="w-btn" data-w="☀️" onclick="pickW(this,'df')">☀️ 晴</button>
+        <button class="w-btn" data-w="⛅" onclick="pickW(this,'df')">⛅ 多雲</button>
+        <button class="w-btn" data-w="☁️" onclick="pickW(this,'df')">☁️ 陰</button>
+        <button class="w-btn" data-w="🌧" onclick="pickW(this,'df')">🌧 雨</button>
+        <button class="w-btn" data-w="⛈" onclick="pickW(this,'df')">⛈ 雷雨</button>
+      </div>
+    </div>
+
+    <!-- 住宿 -->
+    <div class="form-group">
+      <label class="form-label">住宿</label>
+      <div class="stay-radio" id="df-stay-radio">
+        <label><input type="radio" name="df-stay-type" value="same" onchange="toggleStayForm(this)"/> 同前一天</label>
+        <label><input type="radio" name="df-stay-type" value="new" onchange="toggleStayForm(this)" checked/> 新住宿</label>
+      </div>
+      <div id="df-stay-form">
+        <div class="form-group" style="margin-bottom:10px">
+          <label class="form-label">住宿名稱</label>
+          <input class="form-input" id="df-stay-name" placeholder="例：大阪難波 Dormy Inn"/>
+        </div>
+        <div class="subform-row">
+          <div><label class="form-label">整潔</label><div class="star-input" id="df-stay-clean-stars"></div></div>
+          <div><label class="form-label">服務</label><div class="star-input" id="df-stay-service-stars"></div></div>
+        </div>
+        <div class="subform-row" style="margin-top:10px">
+          <div><label class="form-label">位置</label><div class="star-input" id="df-stay-location-stars"></div></div>
+          <div><label class="form-label">價錢</label><div class="star-input" id="df-stay-price-stars"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 去過地點 -->
+    <div class="form-group">
+      <label class="form-label">去過的地點 <span style="color:var(--light);font-weight:400">（逗號分隔）</span></label>
+      <input class="form-input" id="df-spots" placeholder="例：道頓堀, 心齋橋, 環球影城"/>
+    </div>
+
+    <!-- 美食紀錄 -->
+    <hr class="form-divider"/>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <div style="font-size:.84rem;font-weight:600;color:var(--text)">🍜 美食紀錄</div>
+      <button class="btn-sm" onclick="addFoodCard()">＋ 新增</button>
+    </div>
+    <div id="df-food-container"></div>
+
+    <!-- 照片 -->
+    <hr class="form-divider"/>
     <div class="form-group">
       <label class="form-label">照片</label>
-      <div class="photo-upload-area" onclick="document.getElementById('f-photo-input').click()">
-        <div class="photo-upload-icon">📸</div>
-        <div class="photo-upload-text">點擊上傳照片（可多張）</div>
-      </div>
-      <input type="file" id="f-photo-input" class="photo-upload-input" multiple accept="image/*" onchange="handleFormPhotos(this)"/>
-      <div class="form-photo-preview" id="f-photo-preview"></div>
+      <div class="photo-note">📷 照片功能開發中，串接 Google Drive 後可上傳</div>
     </div>
+
+    <!-- 備註 -->
     <div class="form-group">
-      <label class="form-label">備註</label>
-      <textarea class="form-input" id="f-notes" placeholder="記錄這次旅行的感受..."></textarea>
+      <label class="form-label">當日備註</label>
+      <textarea class="form-input" id="df-notes" placeholder="今天印象最深的事…"></textarea>
     </div>
 
-    <hr class="form-divider"/>
-
-    <div class="subform-section">
-      <div class="subform-header">
-        <div class="subform-title">🍜 美食紀錄</div>
-        <button class="subform-add-btn" onclick="addFoodCard()">＋ 新增</button>
-      </div>
-      <div id="food-cards-container"></div>
-    </div>
-
-    <hr class="form-divider"/>
-
-    <div class="subform-section">
-      <div class="subform-header">
-        <div class="subform-title">🏨 住宿紀錄</div>
-        <button class="subform-add-btn" onclick="addStayCard()">＋ 新增</button>
-      </div>
-      <div id="stay-cards-container"></div>
-    </div>
-
-    <button class="form-submit" onclick="submitTrip()">儲存旅行紀錄</button>
+    <button class="form-submit" onclick="submitDay()">儲存這天紀錄</button>
   </div>
 </div>
 
-
-<!-- EDIT FORM MODAL -->
-<div id="edit-form-modal" class="form-modal hidden">
-  <div class="form-overlay" onclick="closeEditForm()"></div>
+<!-- ═══ FUND FORM MODAL ═══ -->
+<div id="fund-form-modal" class="form-modal hidden">
+  <div class="form-overlay" onclick="closeModal('fund-form-modal')"></div>
   <div class="form-box">
-    <button class="form-close" onclick="closeEditForm()">✕</button>
-    <div class="form-title">✏️ 編輯旅行紀錄</div>
-    <input type="hidden" id="e-id"/>
-
-    <div class="form-group">
-      <label class="form-label">旅行名稱</label>
-      <input class="form-input" id="e-name" type="text" placeholder="例：台南老城漫走"/>
-    </div>
+    <button class="form-close" onclick="closeModal('fund-form-modal')">✕</button>
+    <div class="form-title" id="fund-form-title">＋ 新增基金紀錄</div>
+    <input type="hidden" id="ff-id"/>
     <div class="form-group">
       <label class="form-label">日期</label>
-      <input class="form-input" id="e-date" type="date"/>
+      <input class="form-input" id="ff-date" type="date"/>
     </div>
     <div class="form-group">
-      <label class="form-label">城市</label>
-      <input class="form-input" id="e-city" type="text" placeholder="例：台南"/>
+      <label class="form-label">類型</label>
+      <select class="form-input" id="ff-type">
+        <option value="股票獲利">股票獲利</option>
+        <option value="股息入帳">股息入帳</option>
+        <option value="旅行支出">旅行支出</option>
+        <option value="手動調整">手動調整</option>
+      </select>
     </div>
     <div class="form-group">
-      <label class="form-label">去過的地點（用逗號分隔）</label>
-      <input class="form-input" id="e-spots" type="text" placeholder="例：赤崁樓, 安平古堡"/>
-    </div>
-    <div class="form-group">
-      <label class="form-label">大約花費（元）</label>
-      <input class="form-input" id="e-cost" type="number"/>
-    </div>
-    <div class="form-group">
-      <label class="form-label">天氣</label>
-      <div class="weather-picker" id="e-weather-picker">
-        <button class="weather-btn" data-w="☀️" onclick="pickWeatherEdit(this)">☀️ 晴</button>
-        <button class="weather-btn" data-w="⛅" onclick="pickWeatherEdit(this)">⛅ 多雲</button>
-        <button class="weather-btn" data-w="☁️" onclick="pickWeatherEdit(this)">☁️ 陰</button>
-        <button class="weather-btn" data-w="🌧" onclick="pickWeatherEdit(this)">🌧 雨</button>
-        <button class="weather-btn" data-w="⛈" onclick="pickWeatherEdit(this)">⛈ 雷雨</button>
-      </div>
+      <label class="form-label">金額（元）</label>
+      <input class="form-input" id="ff-amount" type="number" placeholder="例：3200"/>
     </div>
     <div class="form-group">
       <label class="form-label">備註</label>
-      <textarea class="form-input" id="e-notes" placeholder="記錄這次旅行的感受..."></textarea>
+      <input class="form-input" id="ff-note" type="text" placeholder="例：00929 股息"/>
     </div>
-
-    <hr class="form-divider"/>
-    <div class="subform-section">
-      <div class="subform-header">
-        <div class="subform-title">🍜 美食紀錄</div>
-        <button class="subform-add-btn" onclick="addFoodCard('e')">＋ 新增</button>
-      </div>
-      <div id="e-food-cards-container"></div>
-    </div>
-    <hr class="form-divider"/>
-    <div class="subform-section">
-      <div class="subform-header">
-        <div class="subform-title">🏨 住宿紀錄</div>
-        <button class="subform-add-btn" onclick="addStayCard('e')">＋ 新增</button>
-      </div>
-      <div id="e-stay-cards-container"></div>
-    </div>
-
-    <button class="form-submit" onclick="saveEdit()">儲存修改</button>
-    <button onclick="confirmDelete()" style="width:100%;margin-top:10px;padding:12px;background:none;border:1.5px solid #d0a0a0;border-radius:var(--radius-md);color:#b07070;font-size:.88rem;cursor:pointer;">刪除這筆旅行紀錄</button>
+    <button class="form-submit" onclick="submitFund()">儲存</button>
+    <button id="ff-delete-btn" class="btn-danger" onclick="confirmDeleteFund()" style="display:none">刪除這筆紀錄</button>
   </div>
 </div>
 
 <script>
-// ── SEED DATA (only written once) ──
-const SEED = [
+// ─── HELPERS ────────────────────────────────────────────────
+function starBtns(key){
+  return [1,2,3,4,5].map(n=>`<button type="button" data-k="${key}" data-v="${n}" onclick="setStar('${key}',${n})">☆</button>`).join('');
+}
+function setStar(key,val){
+  document.querySelectorAll(`[data-k="${key}"]`).forEach(b=>{
+    const v=parseInt(b.dataset.v);
+    b.classList.toggle('on',v<=val);
+    b.textContent=v<=val?'★':'☆';
+  });
+  const container=document.querySelector(`[data-k="${key}"]`)?.closest('.star-input');
+  if(container) container.dataset.val=val;
+}
+function getStarVal(key){
+  const el=document.querySelector(`[data-k="${key}"]`)?.closest('.star-input');
+  return parseInt(el?.dataset.val||3);
+}
+function setStarLater(key,val){ setTimeout(()=>setStar(key,val),20); }
+
+function fmt(str){
+  if(!str) return '';
+  const d=new Date(str+'T00:00:00');
+  return `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;
+}
+function fmtSlash(str){
+  if(!str) return '';
+  const d=new Date(str+'T00:00:00');
+  return `${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,'0')}/${String(d.getDate()).padStart(2,'0')}`;
+}
+function stars(n){ return '★'.repeat(Math.max(0,n))+'☆'.repeat(Math.max(0,5-n)); }
+function addDays(dateStr,n){
+  const d=new Date(dateStr+'T00:00:00'); d.setDate(d.getDate()+n);
+  return d.toISOString().slice(0,10);
+}
+function daysBetween(a,b){
+  const da=new Date(a+'T00:00:00'), db=new Date(b+'T00:00:00');
+  return Math.round((db-da)/(86400000));
+}
+
+// ─── LOCALSTORAGE ────────────────────────────────────────────
+const LS = {
+  TRIPS:'bt_trips', FUNDS:'bt_funds',
+  TID:'bt_tid', FID:'bt_fid'
+};
+const GOAL = 30000;
+
+const SEED_TRIPS = [
   {
-    id:1, name:'台南老城漫走', date:'2025-03-15', city:'台南',
-    emoji:'🏯', weather:'☀️', cost:5500, photos:[],
-    spots:['赤崁樓','安平古堡','神農街','花園夜市'],
-    notes:'天氣很好，老街走起來很舒服。神農街的咖啡廳很好拍，晚上花園夜市完全踩雷了哈哈。',
-    food:[
-      {name:'度小月擔仔麵', type:'事先查', who:'👫一起選的', env:4, price:3, taste:5},
-      {name:'路邊鱔魚意麵', type:'路邊找', who:'👨寶包選的', env:2, price:5, taste:4}
-    ],
-    stay:[{name:'台南老爺行旅', clean:5, service:4, location:5, price:3}]
+    id:1, name:'嘉義森林小旅行', country:'台灣', region:'嘉義',
+    dateStart:'2024-11-08', dateEnd:'2024-11-09',
+    cost:4800, notes:'阿里山的雲海沒有看到，有點可惜。但小火車很可愛，火雞肉飯超好吃！',
+    days:[
+      {
+        date:'2024-11-08', weather:'☁️',
+        stayType:'new', stay:{name:'嘉義福泰桔子商旅',clean:4,service:4,location:4,price:4},
+        spots:['阿里山森林鐵路','嘉義公園'],
+        food:[{name:'噴水雞肉飯',type:'事先查',who:'🤝一起選的',env:3,price:5,taste:5}],
+        notes:''
+      },
+      {
+        date:'2024-11-09', weather:'☀️',
+        stayType:'same', stay:null,
+        spots:['文化路夜市'],
+        food:[],
+        notes:'早上逛了文化路，下午就回家了'
+      }
+    ]
   },
   {
-    id:2, name:'高雄港邊一日', date:'2025-01-20', city:'高雄',
-    emoji:'⚓', weather:'⛅', cost:3200, photos:[],
-    spots:['駁二藝術特區','愛河','瑞豐夜市'],
-    notes:'駁二很大，走到腿軟。愛河邊的日落很美，一定要排時間等！',
-    food:[{name:'六合夜市滷味攤', type:'路邊找', who:'👩小寶選的', env:2, price:5, taste:4}],
-    stay:[]
-  },
-  {
-    id:3, name:'嘉義森林小旅行', date:'2024-11-08', city:'嘉義',
-    emoji:'🌲', weather:'☁️', cost:4800, photos:[],
-    spots:['阿里山森林鐵路','文化路夜市','嘉義公園'],
-    notes:'阿里山的雲海沒有看到，有點可惜。但小火車很可愛，火雞肉飯超好吃！',
-    food:[{name:'噴水雞肉飯', type:'事先查', who:'👫一起選的', env:3, price:5, taste:5}],
-    stay:[{name:'嘉義福泰桔子商旅', clean:4, service:4, location:4, price:4}]
-  },
-  {
-    id:4, name:'台中文藝週末', date:'2024-09-14', city:'台中',
-    emoji:'🎨', weather:'🌧', cost:6200, photos:[],
-    spots:['國立台灣美術館','審計新村','一中街'],
-    notes:'下雨天逛美術館剛好！審計新村的文創小店很多，錢包失守。',
-    food:[
-      {name:'宮原眼科', type:'事先查', who:'👩小寶選的', env:5, price:2, taste:4},
-      {name:'第二市場麵攤', type:'路邊找', who:'👨寶包選的', env:2, price:5, taste:5}
-    ],
-    stay:[{name:'台中日月千禧酒店', clean:5, service:5, location:4, price:2}]
+    id:2, name:'台中文藝週末', country:'台灣', region:'台中',
+    dateStart:'2024-09-14', dateEnd:'2024-09-15',
+    cost:6200, notes:'下雨天逛美術館剛好！審計新村的文創小店很多，錢包失守。',
+    days:[
+      {
+        date:'2024-09-14', weather:'🌧',
+        stayType:'new', stay:{name:'台中日月千禧酒店',clean:5,service:5,location:4,price:2},
+        spots:['國立台灣美術館','審計新村'],
+        food:[
+          {name:'宮原眼科',type:'事先查',who:'👩我選的',env:5,price:2,taste:4},
+          {name:'第二市場麵攤',type:'路邊找',who:'👨寶寶選的',env:2,price:5,taste:5}
+        ],
+        notes:'雨天意外很適合逛館'
+      },
+      {
+        date:'2024-09-15', weather:'⛅',
+        stayType:'same', stay:null,
+        spots:['一中街'],
+        food:[],
+        notes:''
+      }
+    ]
   }
 ];
 
-const LS_KEY  = 'baobao_trips';
-const LS_ID   = 'baobao_next_id';
+const SEED_FUNDS = [
+  {id:1, date:'2025-03-10', type:'股息入帳', amount:3200, note:'00929 股息'},
+  {id:2, date:'2025-01-05', type:'股票獲利', amount:4800, note:'價差獲利'},
+  {id:3, date:'2024-12-20', type:'旅行支出', amount:5500, note:'嘉義旅行花費'}
+];
 
-// ── LOCALSTORAGE HELPERS ──
-function loadTrips() {
-  try {
-    const raw = localStorage.getItem(LS_KEY);
-    if (raw) return JSON.parse(raw);
-  } catch(e){}
-  // First visit: seed data
-  localStorage.setItem(LS_KEY, JSON.stringify(SEED));
-  localStorage.setItem(LS_ID, '5');
-  return JSON.parse(JSON.stringify(SEED));
+function loadData(key, seed){
+  try{ const r=localStorage.getItem(key); if(r) return JSON.parse(r); }catch(e){}
+  localStorage.setItem(key, JSON.stringify(seed));
+  return JSON.parse(JSON.stringify(seed));
 }
-function saveTrips() {
-  localStorage.setItem(LS_KEY, JSON.stringify(TRIPS));
-}
-function loadNextId() {
-  return parseInt(localStorage.getItem(LS_ID) || '5');
-}
-function saveNextId() {
-  localStorage.setItem(LS_ID, String(nextId));
-}
+function save(key, data){ localStorage.setItem(key, JSON.stringify(data)); }
+function loadId(key, def){ return parseInt(localStorage.getItem(key)||def); }
+function saveId(key, v){ localStorage.setItem(key, String(v)); }
 
-// ── STATE ──
-let TRIPS   = loadTrips();
-let nextId  = loadNextId();
-let selectedWeather     = '';
-let selectedWeatherEdit = '';
-let formPhotos  = [];
-let foodCardCount = 0;
-let stayCardCount = 0;
-let editFoodCount = 0;
-let editStayCount = 0;
+let TRIPS = loadData(LS.TRIPS, SEED_TRIPS);
+let FUNDS = loadData(LS.FUNDS, SEED_FUNDS);
+let nextTid = loadId(LS.TID, 3);
+let nextFid = loadId(LS.FID, 4);
 
-// ── NAV ──
-function goTo(pageId) {
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('page-'+pageId)?.classList.add('active');
-  document.querySelector(`.nav-btn[data-page="${pageId}"]`)?.classList.add('active');
+// ─── NAV ────────────────────────────────────────────────────
+function goTo(p){
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(x=>x.classList.remove('active'));
+  document.getElementById('page-'+p)?.classList.add('active');
+  document.querySelector(`.nav-btn[data-page="${p}"]`)?.classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
+  if(p==='piggy') renderFunds();
+  if(p==='map') renderMap();
 }
-document.querySelectorAll('.nav-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>goTo(btn.dataset.page));
-});
+document.querySelectorAll('.nav-btn').forEach(b=>b.addEventListener('click',()=>goTo(b.dataset.page)));
 
-// ── HELPERS ──
-function stars(n){ return '★'.repeat(Math.max(0,n))+'☆'.repeat(Math.max(0,5-n)); }
-function fmt(str){
-  if (!str) return '';
-  const d = new Date(str+'T00:00:00');
-  return `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;
+// ─── FUND CALC ───────────────────────────────────────────────
+function calcFund(){
+  return FUNDS.reduce((s,f)=>f.type==='旅行支出'?s-f.amount:s+f.amount, 0);
 }
 
-// ── TRIP CARD HTML ──
-function tripCardHTML(trip) {
-  return `
-    <div class="trip-card" id="card-${trip.id}">
-      <div class="trip-card-cover">
-        <div class="cover-placeholder"><div class="emoji">${trip.emoji||'📸'}</div><div>📸 點擊下方查看紀錄</div></div>
-        <div class="trip-stamp"><div>${trip.city}</div><div>${fmt(trip.date)}</div></div>
-      </div>
-      <div class="trip-card-body" onclick="openTrip(${trip.id})">
-        <div class="trip-card-meta">
-          <div class="trip-card-name">${trip.name}</div>
-          <div class="trip-card-weather">${trip.weather||''}</div>
+// ─── RENDER HOME ────────────────────────────────────────────
+function renderHome(){
+  // fund
+  const total = calcFund();
+  const pct = Math.min(100, Math.round(total/GOAL*1000)/10);
+  document.getElementById('home-fund-total').textContent = (total>=0?'+$':'-$')+Math.abs(total).toLocaleString();
+  document.getElementById('home-fund-fill').style.width = pct+'%';
+  document.getElementById('home-fund-pct').textContent = pct+'%';
+  document.getElementById('home-goal-fill').style.width = pct+'%';
+  document.getElementById('home-goal-pct').textContent = pct+'%';
+  document.getElementById('home-goal-saved').textContent = '$'+Math.max(0,total).toLocaleString();
+  // places
+  const regionCount={};
+  TRIPS.forEach(t=>{ if(t.region){ const k=t.region; regionCount[k]=(regionCount[k]||0)+1; } });
+  const keys=Object.keys(regionCount);
+  document.getElementById('home-place-count').textContent=keys.length;
+  document.getElementById('home-place-list').textContent = keys.length===0
+    ? '還沒有旅行紀錄' : keys.map(k=>regionCount[k]>1?`${k}（${regionCount[k]}次）`:k).join('・');
+  // recent trips
+  const sorted=[...TRIPS].sort((a,b)=>b.dateStart.localeCompare(a.dateStart));
+  document.getElementById('home-cards').innerHTML = sorted.slice(0,2).map(tripCardHTML).join('') ||
+    '<div style="font-size:.84rem;color:var(--light);padding:20px 0 10px;text-align:center">快去新增第一趟旅行吧！</div>';
+}
+
+// ─── TRIP CARD HTML ─────────────────────────────────────────
+function tripCardHTML(t){
+  const title = t.name || '';
+  const loc = [t.country, t.region].filter(Boolean).join('｜');
+  const dateRange = t.dateStart===t.dateEnd ? fmtSlash(t.dateStart)
+    : `${fmtSlash(t.dateStart)} - ${fmtSlash(t.dateEnd)}`;
+  return `<div class="trip-card" onclick="openTripDetail(${t.id})">
+    <div class="trip-cover">
+      <div>✈️</div>
+      <div class="trip-stamp"><div>${t.region||t.country}</div><div>${fmt(t.dateStart)}</div></div>
+    </div>
+    <div class="trip-body">
+      ${title?`<div class="trip-title">${title}</div>`:''}
+      <div class="trip-loc">${loc}</div>
+      <div class="trip-date">${dateRange}</div>
+      <div class="trip-meta">💰 $${(t.cost||0).toLocaleString()} ・ ${t.days?.length||0} 天</div>
+    </div>
+  </div>`;
+}
+
+// ─── RENDER RECORDS ──────────────────────────────────────────
+function renderRecords(){
+  const sorted=[...TRIPS].sort((a,b)=>b.dateStart.localeCompare(a.dateStart));
+  document.getElementById('all-cards').innerHTML = sorted.map(tripCardHTML).join('') ||
+    '<div style="font-size:.84rem;color:var(--light);padding:20px 0;text-align:center">還沒有旅行紀錄</div>';
+}
+
+// ─── TRIP DETAIL ─────────────────────────────────────────────
+function openTripDetail(id){
+  const t=TRIPS.find(x=>x.id===id); if(!t) return;
+  const loc=[t.country,t.region].filter(Boolean).join('｜');
+  const dateRange=t.dateStart===t.dateEnd?fmtSlash(t.dateStart):`${fmtSlash(t.dateStart)} – ${fmtSlash(t.dateEnd)}`;
+
+  const daysHTML = (t.days||[]).map((day,i)=>{
+    const label=`Day ${i+1}｜${fmtSlash(day.date)}`;
+    const wIcon=day.weather||'';
+    const spotsHTML=(day.spots||[]).length
+      ? `<div class="day-section"><div class="day-sec-title">去過的地方</div><div class="spot-tags">${day.spots.map(s=>`<span class="spot-tag">${s}</span>`).join('')}</div></div>` : '';
+    const stayHTML = day.stayType==='same'
+      ? `<div class="day-section"><div class="day-sec-title">住宿</div><div style="font-size:.82rem;color:var(--sub)">同前一天住宿</div></div>`
+      : (day.stay ? `<div class="day-section"><div class="day-sec-title">住宿</div><div class="stay-card"><div class="stay-name">${day.stay.name}</div><div class="stay-ratings">
+          <div class="rating-row"><div class="rating-label">整潔</div><div class="stars">${stars(day.stay.clean)}</div></div>
+          <div class="rating-row"><div class="rating-label">服務</div><div class="stars">${stars(day.stay.service)}</div></div>
+          <div class="rating-row"><div class="rating-label">位置</div><div class="stars">${stars(day.stay.location)}</div></div>
+          <div class="rating-row"><div class="rating-label">價錢</div><div class="stars">${stars(day.stay.price)}</div></div>
+        </div></div></div>` : '');
+    const foodHTML=(day.food||[]).length ? `<div class="day-section"><div class="day-sec-title">美食紀錄</div>${(day.food||[]).map(f=>`
+      <div class="food-card">
+        <div class="food-name">${f.name}</div>
+        <div class="food-meta">${f.type} ・ ${f.who||''}</div>
+        <div class="food-ratings">
+          <div class="rating-row"><div class="rating-label">環境</div><div class="stars">${stars(f.env)}</div></div>
+          <div class="rating-row"><div class="rating-label">價錢</div><div class="stars">${stars(f.price)}</div></div>
+          <div class="rating-row"><div class="rating-label">美味</div><div class="stars">${stars(f.taste)}</div></div>
         </div>
-        <div class="trip-card-info">
-          <span>📅 ${fmt(trip.date)}</span>
-          <span>📍 ${trip.city}</span>
-          <span>💰 $${(trip.cost||0).toLocaleString()}</span>
+      </div>`).join('')}</div>` : '';
+    const notesHTML=day.notes?`<div class="day-section"><div class="day-sec-title">備註</div><div class="notes-box">${day.notes}</div></div>`:'';
+    return `<div class="day-item">
+      <div class="day-toggle" onclick="toggleDay(this)">
+        <span class="day-toggle-label"><span class="day-toggle-weather">${wIcon}</span>${label}</span>
+        <span class="day-toggle-arrow">▼</span>
+      </div>
+      <div class="day-content">
+        ${spotsHTML}${stayHTML}${foodHTML}
+        <div class="day-section"><div class="day-sec-title">照片</div><div class="photo-placeholder">📷 照片功能開發中</div></div>
+        ${notesHTML}
+        <div style="margin-top:12px">
+          <button class="btn-sm" onclick="openDayForm(${id},${i})">✏️ 編輯這天</button>
         </div>
       </div>
     </div>`;
-}
+  }).join('');
 
-// ── RENDER ──
-function renderCards() {
-  const sorted = [...TRIPS].sort((a,b)=>b.date.localeCompare(a.date));
-  document.getElementById('home-cards').innerHTML = sorted.slice(0,2).map(tripCardHTML).join('');
-  document.getElementById('all-cards').innerHTML  = sorted.map(tripCardHTML).join('');
-
-  // 唯一城市數（首頁）
-  const cityCount = {};
-  TRIPS.forEach(t=>{ if(t.city) cityCount[t.city] = (cityCount[t.city]||0)+1; });
-  const uniqueCities = Object.keys(cityCount);
-  const countEl = document.getElementById('home-city-count');
-  const listEl  = document.getElementById('home-city-list');
-  if(countEl) countEl.textContent = uniqueCities.length;
-  if(listEl){
-    if(uniqueCities.length===0){
-      listEl.textContent = '還沒有紀錄，快去旅行吧！';
-    } else {
-      listEl.textContent = uniqueCities
-        .map(c=> cityCount[c]>1 ? `${c}（${cityCount[c]}次）` : c)
-        .join('・');
-    }
-  }
-}
-
-// ── DETAIL MODAL ──
-function openTrip(id) {
-  const trip = TRIPS.find(t=>t.id===id);
-  if (!trip) return;
-
-  const foodCards = (trip.food||[]).map(f=>`
-    <div class="sub-card">
-      <div class="sub-card-name">${f.name}</div>
-      <div class="sub-card-tag">${f.type||''}</div>
-      ${f.who?`<div class="sub-card-picker">${f.who}</div>`:''}
-      <div class="sub-card-ratings">
-        <div class="rating-row"><div class="rating-label">環境</div><div class="stars">${stars(f.env)}</div></div>
-        <div class="rating-row"><div class="rating-label">價錢</div><div class="stars">${stars(f.price)}</div></div>
-        <div class="rating-row"><div class="rating-label">美味</div><div class="stars">${stars(f.taste)}</div></div>
-      </div>
-    </div>`).join('');
-
-  const stayCards = (trip.stay||[]).map(s=>`
-    <div class="sub-card">
-      <div class="sub-card-name">${s.name}</div>
-      <div class="sub-card-ratings">
-        <div class="rating-row"><div class="rating-label">整潔</div><div class="stars">${stars(s.clean)}</div></div>
-        <div class="rating-row"><div class="rating-label">服務</div><div class="stars">${stars(s.service)}</div></div>
-        <div class="rating-row"><div class="rating-label">位置</div><div class="stars">${stars(s.location)}</div></div>
-        <div class="rating-row"><div class="rating-label">價錢</div><div class="stars">${stars(s.price)}</div></div>
-      </div>
-    </div>`).join('') || '<div style="font-size:.82rem;color:var(--text-sub);padding:4px 0">這次沒有住宿紀錄</div>';
-
-  const photoNote = `<div style="font-size:.78rem;color:var(--text-light);padding:10px 0">📷 照片功能開發中，敬請期待</div>`;
-
-  document.getElementById('modal-content').innerHTML=`
-    <div class="modal-trip-header">
-      <div class="modal-trip-name">${trip.name}</div>
-      <div class="modal-weather">${trip.weather||''}</div>
+  document.getElementById('trip-detail-content').innerHTML=`
+    <div class="detail-hd">
+      ${t.name?`<div class="detail-trip-name">${t.name}</div>`:''}
+      <div class="detail-loc">${loc}</div>
+      <div class="detail-date">${dateRange}</div>
     </div>
-    <div class="modal-meta">
-      <span>📅 ${fmt(trip.date)}</span>
-      <span>📍 ${trip.city}</span>
-      <span>💰 $${(trip.cost||0).toLocaleString()}</span>
+    <div class="detail-meta">
+      <span>💰 $${(t.cost||0).toLocaleString()}</span>
+      <span>📅 ${t.days?.length||0} 天</span>
     </div>
-
-    <div style="display:flex;gap:8px;margin-bottom:20px">
-      <button onclick="openEditForm(${trip.id})" style="flex:1;padding:10px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);font-size:.85rem;cursor:pointer;color:var(--text)">✏️ 編輯</button>
+    ${t.notes?`<div class="notes-box" style="margin-bottom:18px">${t.notes}</div>`:''}
+    <div style="display:flex;gap:8px;margin-bottom:18px">
+      <button class="detail-edit-btn" onclick="openTripForm(${t.id})">✏️ 編輯基本資料</button>
+      <button class="btn-sm" onclick="addDay(${t.id})">＋ 新增一天</button>
+      <button class="btn-sm" onclick="removeLastDay(${t.id})" style="border-color:#d0a0a0;color:var(--red)">－ 刪除最後一天</button>
     </div>
-
-    ${trip.spots&&trip.spots.length?`
-    <div class="modal-section">
-      <div class="modal-section-title">去過的地方</div>
-      <div class="spot-tags">${trip.spots.map(s=>`<span class="spot-tag">${s}</span>`).join('')}</div>
-    </div>`:''}
-
-    ${(trip.food||[]).length?`
-    <div class="modal-section">
-      <div class="modal-section-title">🍜 美食紀錄</div>
-      <div class="sub-cards">${foodCards}</div>
-    </div>`:''}
-
-    <div class="modal-section">
-      <div class="modal-section-title">🏨 住宿紀錄</div>
-      <div class="sub-cards">${stayCards}</div>
-    </div>
-
-    ${trip.notes?`
-    <div class="modal-section">
-      <div class="modal-section-title">備註</div>
-      <div class="notes-box">${trip.notes}</div>
-    </div>`:''}
-
-    <div class="modal-section">
-      <div class="modal-section-title">📸 照片牆</div>
-      ${photoNote}
-    </div>`;
+    <div class="sec-label">每日紀錄</div>
+    <div class="day-list">${daysHTML||'<div style="font-size:.82rem;color:var(--light);padding:8px 0">沒有每日紀錄</div>'}</div>`;
 
   document.getElementById('trip-modal').classList.remove('hidden');
   document.body.style.overflow='hidden';
 }
 
-function closeModal() {
-  document.getElementById('trip-modal').classList.add('hidden');
-  document.body.style.overflow='';
-}
-document.addEventListener('keydown',e=>{
-  if(e.key==='Escape'){ closeModal(); closeAddForm(); closeEditForm(); }
-});
-
-// ── MAP ──
-const CITY_MAP = {};
-function rebuildCityMap() {
-  Object.keys(CITY_MAP).forEach(k=>delete CITY_MAP[k]);
-  TRIPS.forEach(t=>{
-    const k = (t.city||'').toLowerCase()
-      .replace('台南','tainan').replace('高雄','kaohsiung')
-      .replace('嘉義','chiayi').replace('台中','taichung')
-      .replace('台北','taipei');
-    if (!CITY_MAP[k]) CITY_MAP[k]=[];
-    CITY_MAP[k].push(t.id);
-  });
+function toggleDay(el){
+  el.classList.toggle('open');
+  el.nextElementSibling.classList.toggle('open');
 }
 
-function showCityTrip(cityKey) {
-  rebuildCityMap();
-  const ids = CITY_MAP[cityKey]||[];
-  if (!ids.length) return;
-  const trip = TRIPS.find(t=>t.id===ids[0]);
-  if (!trip) return;
-  const visitCount = ids.length;
-  document.getElementById('popup-content').innerHTML=`
-    <div class="popup-trip-name">${trip.emoji||'📍'} ${trip.name}</div>
-    <div class="popup-meta">
-      📅 ${fmt(trip.date)} ・ 💰 $${(trip.cost||0).toLocaleString()}
-    </div>
-    ${visitCount>1
-      ? `<div style="font-size:.76rem;background:var(--card);border-radius:20px;display:inline-block;padding:3px 10px;margin-bottom:10px;color:var(--highlight)">共去過 ${visitCount} 次</div>`
-      : ''}
-    <div><button class="popup-view-btn" onclick="openTrip(${trip.id})">查看最近紀錄</button></div>`;
-  document.getElementById('city-popup').classList.remove('hidden');
-}
-function closeCityPopup(){document.getElementById('city-popup').classList.add('hidden');}
-
-// ── ADD FORM ──
-function openAddForm(){
-  resetAddForm();
-  document.getElementById('add-form-modal').classList.remove('hidden');
+// ─── TRIP FORM ───────────────────────────────────────────────
+function openTripForm(id){
+  const isEdit=id!==undefined;
+  document.getElementById('trip-form-title').textContent=isEdit?'✏️ 編輯旅行':'＋ 新增旅行';
+  document.getElementById('tf-id').value='';
+  document.getElementById('tf-name').value='';
+  document.getElementById('tf-country').value='';
+  document.getElementById('tf-region').value='';
+  document.getElementById('tf-start').value='';
+  document.getElementById('tf-end').value='';
+  document.getElementById('tf-cost').value='';
+  document.getElementById('tf-notes').value='';
+  document.getElementById('tf-delete-btn').style.display='none';
+  if(isEdit){
+    const t=TRIPS.find(x=>x.id===id); if(!t) return;
+    // close detail modal first
+    closeModal('trip-modal');
+    document.getElementById('tf-id').value=id;
+    document.getElementById('tf-name').value=t.name||'';
+    document.getElementById('tf-country').value=t.country||'';
+    document.getElementById('tf-region').value=t.region||'';
+    document.getElementById('tf-start').value=t.dateStart||'';
+    document.getElementById('tf-end').value=t.dateEnd||'';
+    document.getElementById('tf-cost').value=t.cost||'';
+    document.getElementById('tf-notes').value=t.notes||'';
+    document.getElementById('tf-delete-btn').style.display='block';
+  }
+  document.getElementById('trip-form-modal').classList.remove('hidden');
   document.body.style.overflow='hidden';
 }
-function closeAddForm(){
-  document.getElementById('add-form-modal').classList.add('hidden');
-  document.body.style.overflow='';
-}
-function resetAddForm(){
-  ['f-name','f-date','f-city','f-spots','f-cost','f-notes'].forEach(id=>{
-    const el=document.getElementById(id); if(el) el.value='';
-  });
-  document.getElementById('f-photo-preview').innerHTML='';
-  document.getElementById('food-cards-container').innerHTML='';
-  document.getElementById('stay-cards-container').innerHTML='';
-  document.querySelectorAll('#add-form-modal .weather-btn').forEach(b=>b.classList.remove('selected'));
-  selectedWeather=''; formPhotos=[]; foodCardCount=0; stayCardCount=0;
-}
 
-function pickWeather(btn){
-  document.querySelectorAll('#add-form-modal .weather-btn').forEach(b=>b.classList.remove('selected'));
-  btn.classList.add('selected');
-  selectedWeather=btn.dataset.w;
-}
+function submitTrip(){
+  const country=document.getElementById('tf-country').value.trim();
+  const region=document.getElementById('tf-region').value.trim();
+  const start=document.getElementById('tf-start').value;
+  const end=document.getElementById('tf-end').value;
+  if(!country||!region||!start||!end){alert('請填寫國家、旅行區域、開始與結束日期');return;}
+  if(end<start){alert('結束日期不能早於開始日期');return;}
 
-function handleFormPhotos(input){
-  // Photos stored in memory only (LocalStorage size limit)
-  if (!input.files||!input.files.length) return;
-  document.getElementById('f-photo-preview').innerHTML=
-    `<div style="font-size:.76rem;color:var(--text-sub);padding:6px 0">已選擇 ${input.files.length} 張照片（本機預覽，重新整理後消失）</div>`;
-}
+  const idVal=document.getElementById('tf-id').value;
+  const n=daysBetween(start,end);
+  const newDays=Array.from({length:n+1},(_,i)=>({
+    date:addDays(start,i), weather:'', stayType:i===0?'new':'same',
+    stay:null, spots:[], food:[], notes:''
+  }));
 
-// ── EDIT FORM ──
-function openEditForm(id) {
-  const trip = TRIPS.find(t=>t.id===id);
-  if (!trip) return;
-  closeModal();
-
-  document.getElementById('e-id').value   = id;
-  document.getElementById('e-name').value = trip.name||'';
-  document.getElementById('e-date').value = trip.date||'';
-  document.getElementById('e-city').value = trip.city||'';
-  document.getElementById('e-spots').value= (trip.spots||[]).join(', ');
-  document.getElementById('e-cost').value = trip.cost||'';
-  document.getElementById('e-notes').value= trip.notes||'';
-
-  // weather
-  document.querySelectorAll('#edit-form-modal .weather-btn').forEach(b=>{
-    b.classList.toggle('selected', b.dataset.w===trip.weather);
-  });
-  selectedWeatherEdit = trip.weather||'';
-
-  // food cards
-  editFoodCount=0;
-  document.getElementById('e-food-cards-container').innerHTML='';
-  (trip.food||[]).forEach(f=>{
-    addFoodCard('e');
-    const i=editFoodCount; const p=`e-food-${i}`;
-    const nameEl=document.getElementById(p+'-name'); if(nameEl) nameEl.value=f.name||'';
-    const typeEl=document.getElementById(p+'-type'); if(typeEl) typeEl.value=f.type||'事先查';
-    if(f.who){
-      const whoBtn=document.querySelector(`#${p}-who-picker .who-btn[data-w="${f.who}"]`);
-      if(whoBtn){ document.querySelectorAll(`#${p}-who-picker .who-btn`).forEach(b=>b.classList.remove('selected')); whoBtn.classList.add('selected'); }
+  if(idVal){
+    const idx=TRIPS.findIndex(x=>x.id===parseInt(idVal));
+    if(idx!==-1){
+      const old=TRIPS[idx];
+      // preserve existing day data if dates match
+      const mergedDays=newDays.map(nd=>{
+        const ex=(old.days||[]).find(d=>d.date===nd.date);
+        return ex||nd;
+      });
+      TRIPS[idx]={...old,
+        name:document.getElementById('tf-name').value.trim()||'',
+        country, region, dateStart:start, dateEnd:end,
+        cost:parseInt(document.getElementById('tf-cost').value)||0,
+        notes:document.getElementById('tf-notes').value.trim(),
+        days:mergedDays
+      };
     }
-    ['env','price','taste'].forEach(k=>{ if(f[k]) setStarDirect(p,k,f[k]); });
-  });
+  } else {
+    TRIPS.unshift({
+      id:nextTid++,
+      name:document.getElementById('tf-name').value.trim()||'',
+      country, region, dateStart:start, dateEnd:end,
+      cost:parseInt(document.getElementById('tf-cost').value)||0,
+      notes:document.getElementById('tf-notes').value.trim(),
+      days:newDays
+    });
+    saveId(LS.TID, nextTid);
+  }
+  save(LS.TRIPS, TRIPS);
+  renderAll();
+  closeModal('trip-form-modal');
+}
 
-  // stay cards
-  editStayCount=0;
-  document.getElementById('e-stay-cards-container').innerHTML='';
-  (trip.stay||[]).forEach(s=>{
-    addStayCard('e');
-    const i=editStayCount; const p=`e-stay-${i}`;
-    const nameEl=document.getElementById(p+'-name'); if(nameEl) nameEl.value=s.name||'';
-    ['clean','service','location','price'].forEach(k=>{ if(s[k]) setStarDirect(p,k,s[k]); });
-  });
+function confirmDeleteTrip(){
+  const id=parseInt(document.getElementById('tf-id').value);
+  const t=TRIPS.find(x=>x.id===id); if(!t) return;
+  if(!confirm(`確定要刪除「${t.name||t.region}」？`)) return;
+  TRIPS=TRIPS.filter(x=>x.id!==id);
+  save(LS.TRIPS, TRIPS);
+  renderAll();
+  closeModal('trip-form-modal');
+}
 
-  document.getElementById('edit-form-modal').classList.remove('hidden');
+// add/remove days
+function addDay(tripId){
+  const t=TRIPS.find(x=>x.id===tripId); if(!t) return;
+  const lastDate=t.days.length>0?t.days[t.days.length-1].date:t.dateEnd;
+  const newDate=addDays(lastDate,1);
+  t.days.push({date:newDate,weather:'',stayType:'same',stay:null,spots:[],food:[],notes:''});
+  t.dateEnd=newDate;
+  save(LS.TRIPS,TRIPS);
+  openTripDetail(tripId);
+}
+function removeLastDay(tripId){
+  const t=TRIPS.find(x=>x.id===tripId); if(!t||t.days.length<=1) return;
+  if(!confirm('確定要刪除最後一天？')) return;
+  t.days.pop();
+  t.dateEnd=t.days[t.days.length-1].date;
+  save(LS.TRIPS,TRIPS);
+  openTripDetail(tripId);
+}
+
+// ─── DAY FORM ────────────────────────────────────────────────
+let dfFoodCount=0;
+function openDayForm(tripId, dayIdx){
+  closeModal('trip-modal');
+  const t=TRIPS.find(x=>x.id===tripId); if(!t) return;
+  const day=t.days[dayIdx];
+  document.getElementById('day-form-title').textContent=`Day ${dayIdx+1}｜${fmtSlash(day.date)}`;
+  document.getElementById('df-trip-id').value=tripId;
+  document.getElementById('df-day-idx').value=dayIdx;
+  // weather
+  document.querySelectorAll('#df-weather .w-btn').forEach(b=>{
+    b.classList.toggle('sel', b.dataset.w===day.weather);
+  });
+  // stay
+  const isDay1=dayIdx===0;
+  document.querySelector('input[name="df-stay-type"][value="same"]').disabled=isDay1;
+  const stayVal = day.stayType==='same' && !isDay1 ? 'same' : 'new';
+  document.querySelector(`input[name="df-stay-type"][value="${stayVal}"]`).checked=true;
+  document.getElementById('df-stay-form').style.display=stayVal==='same'?'none':'block';
+  document.getElementById('df-stay-name').value=day.stay?.name||'';
+  ['clean','service','location','price'].forEach(k=>setStarLater(`df-stay-${k}`,day.stay?.[k]||3));
+  // spots
+  document.getElementById('df-spots').value=(day.spots||[]).join(', ');
+  // food
+  dfFoodCount=0;
+  document.getElementById('df-food-container').innerHTML='';
+  (day.food||[]).forEach(f=>addFoodCard(f));
+  // notes
+  document.getElementById('df-notes').value=day.notes||'';
+
+  document.getElementById('day-form-modal').classList.remove('hidden');
   document.body.style.overflow='hidden';
 }
 
-function closeEditForm(){
-  document.getElementById('edit-form-modal').classList.add('hidden');
-  document.body.style.overflow='';
+function toggleStayForm(radio){
+  document.getElementById('df-stay-form').style.display=radio.value==='same'?'none':'block';
 }
 
-function pickWeatherEdit(btn){
-  document.querySelectorAll('#edit-form-modal .weather-btn').forEach(b=>b.classList.remove('selected'));
-  btn.classList.add('selected');
-  selectedWeatherEdit=btn.dataset.w;
-}
-
-function saveEdit(){
-  const id  = parseInt(document.getElementById('e-id').value);
-  const idx = TRIPS.findIndex(t=>t.id===id);
-  if (idx===-1) return;
-
-  const name = document.getElementById('e-name').value.trim();
-  const date = document.getElementById('e-date').value;
-  const city = document.getElementById('e-city').value.trim();
-  if (!name||!date||!city){ alert('請填寫旅行名稱、日期和城市'); return; }
-
-  const spots = document.getElementById('e-spots').value.split(/[,，]/).map(s=>s.trim()).filter(Boolean);
-  const cost  = parseInt(document.getElementById('e-cost').value)||0;
-  const notes = document.getElementById('e-notes').value.trim();
-
-  const food=[];
-  document.querySelectorAll('#e-food-cards-container [id^="e-food-card-"]').forEach(card=>{
-    const n=card.id.replace('e-food-card-',''); const p=`e-food-${n}`;
-    const nm=document.getElementById(p+'-name')?.value.trim(); if(!nm) return;
-    food.push({name:nm,type:document.getElementById(p+'-type')?.value||'事先查',who:getWhoVal(p),env:getStarVal(p,'env'),price:getStarVal(p,'price'),taste:getStarVal(p,'taste')});
-  });
-
-  const stay=[];
-  document.querySelectorAll('#e-stay-cards-container [id^="e-stay-card-"]').forEach(card=>{
-    const n=card.id.replace('e-stay-card-',''); const p=`e-stay-${n}`;
-    const nm=document.getElementById(p+'-name')?.value.trim(); if(!nm) return;
-    stay.push({name:nm,clean:getStarVal(p,'clean'),service:getStarVal(p,'service'),location:getStarVal(p,'location'),price:getStarVal(p,'price')});
-  });
-
-  TRIPS[idx] = {...TRIPS[idx], name, date, city, spots, cost, notes,
-    weather: selectedWeatherEdit||TRIPS[idx].weather||'☀️', food, stay};
-  saveTrips();
-  renderCards();
-  closeEditForm();
-}
-
-function confirmDelete(){
-  const id = parseInt(document.getElementById('e-id').value);
-  const trip = TRIPS.find(t=>t.id===id);
-  if (!trip) return;
-  if (!confirm(`確定要刪除「${trip.name}」嗎？\n刪除後無法復原。`)) return;
-  TRIPS = TRIPS.filter(t=>t.id!==id);
-  saveTrips();
-  renderCards();
-  closeEditForm();
-}
-
-// ── SHARED SUBFORM BUILDERS ──
-function addFoodCard(prefix='f'){
-  const isEdit = prefix==='e';
-  if(isEdit) editFoodCount++; else foodCardCount++;
-  const i = isEdit ? editFoodCount : foodCardCount;
-  const p = `${prefix}-food-${i}`;
-  const container = isEdit ? 'e-food-cards-container' : 'food-cards-container';
-
+function addFoodCard(prefill){
+  dfFoodCount++;
+  const i=dfFoodCount;
+  const k=`df-food-${i}`;
   const div=document.createElement('div');
-  div.className='subform-card';
-  div.id=`${prefix}-food-card-${i}`;
+  div.className='subform-card'; div.id=`df-food-card-${i}`;
   div.innerHTML=`
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-      <div style="font-size:.82rem;font-weight:600;color:var(--text)">美食 ${i}</div>
-      <button onclick="this.closest('.subform-card').remove()" style="background:none;border:none;color:var(--text-sub);cursor:pointer;font-size:.8rem">移除</button>
+    <div class="subform-hd">
+      <div class="subform-title">美食 ${i}</div>
+      <button onclick="this.closest('.subform-card').remove()" style="background:none;border:none;color:var(--sub);cursor:pointer;font-size:.8rem">移除</button>
     </div>
-    <div class="form-group"><label class="form-label">店名</label><input class="form-input" id="${p}-name" placeholder="例：度小月擔仔麵"/></div>
+    <div class="form-group"><label class="form-label">店名</label><input class="form-input" id="${k}-name" placeholder="例：一蘭拉麵"/></div>
     <div class="form-group">
       <label class="form-label">這家誰選的？</label>
-      ${whoPickerHTML(p)}
+      <div class="who-picker" id="${k}-who">
+        <button type="button" class="who-btn" data-w="👩我選的" onclick="pickWho('${k}',this)">👩 我選的</button>
+        <button type="button" class="who-btn" data-w="👨寶寶選的" onclick="pickWho('${k}',this)">👨 寶寶選的</button>
+        <button type="button" class="who-btn" data-w="🤝一起選的" onclick="pickWho('${k}',this)">🤝 一起選的</button>
+      </div>
     </div>
     <div class="form-group">
       <label class="form-label">類型</label>
-      <select class="form-input" id="${p}-type">
+      <select class="form-input" id="${k}-type">
         <option value="事先查">事先查</option>
         <option value="路邊找">路邊找</option>
       </select>
     </div>
     <div class="subform-row">
-      <div><label class="form-label">環境</label>${starInputHTML('env',p)}</div>
-      <div><label class="form-label">價錢</label>${starInputHTML('price',p)}</div>
+      <div><label class="form-label">環境</label><div class="star-input" id="${k}-env-stars">${starBtns(k+'-env')}</div></div>
+      <div><label class="form-label">價錢</label><div class="star-input" id="${k}-price-stars">${starBtns(k+'-price')}</div></div>
     </div>
-    <div style="margin-top:10px"><label class="form-label">美味</label>${starInputHTML('taste',p)}</div>`;
-  document.getElementById(container).appendChild(div);
+    <div style="margin-top:10px"><label class="form-label">美味</label><div class="star-input" id="${k}-taste-stars">${starBtns(k+'-taste')}</div></div>`;
+  document.getElementById('df-food-container').appendChild(div);
+  if(prefill){
+    setTimeout(()=>{
+      const n=document.getElementById(`${k}-name`); if(n) n.value=prefill.name||'';
+      const ty=document.getElementById(`${k}-type`); if(ty) ty.value=prefill.type||'事先查';
+      if(prefill.who){
+        const wb=document.querySelector(`#${k}-who .who-btn[data-w="${prefill.who}"]`);
+        if(wb){ document.querySelectorAll(`#${k}-who .who-btn`).forEach(b=>b.classList.remove('sel')); wb.classList.add('sel'); }
+      }
+      ['env','price','taste'].forEach(f=>{ if(prefill[f]) setStar(`${k}-${f}`,prefill[f]); });
+    },20);
+  }
+}
+function pickWho(k,btn){
+  document.querySelectorAll(`#${k}-who .who-btn`).forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+}
+function getWhoVal(k){
+  return document.querySelector(`#${k}-who .who-btn.sel`)?.dataset.w||'';
 }
 
-function addStayCard(prefix='f'){
-  const isEdit = prefix==='e';
-  if(isEdit) editStayCount++; else stayCardCount++;
-  const i = isEdit ? editStayCount : stayCardCount;
-  const p = `${prefix}-stay-${i}`;
-  const container = isEdit ? 'e-stay-cards-container' : 'stay-cards-container';
-
-  const div=document.createElement('div');
-  div.className='subform-card';
-  div.id=`${prefix}-stay-card-${i}`;
-  div.innerHTML=`
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-      <div style="font-size:.82rem;font-weight:600;color:var(--text)">住宿 ${i}</div>
-      <button onclick="this.closest('.subform-card').remove()" style="background:none;border:none;color:var(--text-sub);cursor:pointer;font-size:.8rem">移除</button>
-    </div>
-    <div class="form-group"><label class="form-label">住宿名稱</label><input class="form-input" id="${p}-name" placeholder="例：台南老爺行旅"/></div>
-    <div class="subform-row">
-      <div><label class="form-label">整潔</label>${starInputHTML('clean',p)}</div>
-      <div><label class="form-label">服務</label>${starInputHTML('service',p)}</div>
-    </div>
-    <div class="subform-row" style="margin-top:10px">
-      <div><label class="form-label">位置</label>${starInputHTML('location',p)}</div>
-      <div><label class="form-label">價錢</label>${starInputHTML('price',p)}</div>
-    </div>`;
-  document.getElementById(container).appendChild(div);
+function pickW(btn, ctx){
+  document.querySelectorAll(`#${ctx}-weather .w-btn`).forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
 }
 
-// ── STAR HELPERS ──
-function starInputHTML(name,prefix){
-  return `<div class="star-input" id="${prefix}-${name}-stars">
-    ${[1,2,3,4,5].map(n=>`<button type="button" onclick="setStar('${prefix}','${name}',${n})" data-v="${n}">☆</button>`).join('')}
-  </div>`;
-}
-function setStar(prefix,name,val){
-  const c=document.getElementById(`${prefix}-${name}-stars`);
-  if(!c) return;
-  c.querySelectorAll('button').forEach(btn=>{
-    btn.classList.toggle('on',parseInt(btn.dataset.v)<=val);
-    btn.textContent=parseInt(btn.dataset.v)<=val?'★':'☆';
-  });
-  c.dataset.val=val;
-}
-function setStarDirect(prefix,name,val){
-  // Call after element exists in DOM
-  setTimeout(()=>setStar(prefix,name,val),0);
-}
-function getStarVal(prefix,name){
-  const el=document.getElementById(`${prefix}-${name}-stars`);
-  return parseInt(el?.dataset.val||3);
-}
+function submitDay(){
+  const tripId=parseInt(document.getElementById('df-trip-id').value);
+  const dayIdx=parseInt(document.getElementById('df-day-idx').value);
+  const t=TRIPS.find(x=>x.id===tripId); if(!t) return;
+  const day=t.days[dayIdx];
 
-// ── WHO PICKER ──
-function whoPickerHTML(prefix){
-  return `<div class="who-picker" id="${prefix}-who-picker">
-    <button type="button" class="who-btn" data-w="👩小寶選的" onclick="pickWho('${prefix}',this)">👩 小寶選的</button>
-    <button type="button" class="who-btn" data-w="👨寶包選的" onclick="pickWho('${prefix}',this)">👨 寶包選的</button>
-    <button type="button" class="who-btn" data-w="👫一起選的" onclick="pickWho('${prefix}',this)">👫 一起選的</button>
-  </div>`;
-}
-function pickWho(prefix,btn){
-  document.querySelectorAll(`#${prefix}-who-picker .who-btn`).forEach(b=>b.classList.remove('selected'));
-  btn.classList.add('selected');
-}
-function getWhoVal(prefix){
-  return document.querySelector(`#${prefix}-who-picker .who-btn.selected`)?.dataset.w||'';
-}
-
-// ── SUBMIT NEW TRIP ──
-function submitTrip(){
-  const name=document.getElementById('f-name').value.trim();
-  const date=document.getElementById('f-date').value;
-  const city=document.getElementById('f-city').value.trim();
-  if (!name||!date||!city){alert('請填寫旅行名稱、日期和城市');return;}
-
-  const spots=document.getElementById('f-spots').value.split(/[,，]/).map(s=>s.trim()).filter(Boolean);
-  const cost=parseInt(document.getElementById('f-cost').value)||0;
-  const notes=document.getElementById('f-notes').value.trim();
+  day.weather = document.querySelector('#df-weather .w-btn.sel')?.dataset.w||'';
+  day.stayType = document.querySelector('input[name="df-stay-type"]:checked')?.value||'new';
+  if(day.stayType==='new'){
+    day.stay={
+      name:document.getElementById('df-stay-name').value.trim(),
+      clean:getStarVal('df-stay-clean'), service:getStarVal('df-stay-service'),
+      location:getStarVal('df-stay-location'), price:getStarVal('df-stay-price')
+    };
+  } else { day.stay=null; }
+  day.spots=document.getElementById('df-spots').value.split(/[,，]/).map(s=>s.trim()).filter(Boolean);
+  day.notes=document.getElementById('df-notes').value.trim();
 
   const food=[];
-  document.querySelectorAll('#food-cards-container [id^="f-food-card-"]').forEach(card=>{
-    const n=card.id.replace('f-food-card-',''); const p=`f-food-${n}`;
-    const nm=document.getElementById(p+'-name')?.value.trim(); if(!nm) return;
-    food.push({name:nm,type:document.getElementById(p+'-type')?.value||'事先查',who:getWhoVal(p),env:getStarVal(p,'env'),price:getStarVal(p,'price'),taste:getStarVal(p,'taste')});
+  document.querySelectorAll('#df-food-container [id^="df-food-card-"]').forEach(card=>{
+    const idx=card.id.replace('df-food-card-','');
+    const k=`df-food-${idx}`;
+    const nm=document.getElementById(`${k}-name`)?.value.trim(); if(!nm) return;
+    food.push({name:nm,type:document.getElementById(`${k}-type`)?.value||'事先查',
+      who:getWhoVal(k),env:getStarVal(`${k}-env`),price:getStarVal(`${k}-price`),taste:getStarVal(`${k}-taste`)});
   });
+  day.food=food;
 
-  const stay=[];
-  document.querySelectorAll('#stay-cards-container [id^="f-stay-card-"]').forEach(card=>{
-    const n=card.id.replace('f-stay-card-',''); const p=`f-stay-${n}`;
-    const nm=document.getElementById(p+'-name')?.value.trim(); if(!nm) return;
-    stay.push({name:nm,clean:getStarVal(p,'clean'),service:getStarVal(p,'service'),location:getStarVal(p,'location'),price:getStarVal(p,'price')});
-  });
-
-  TRIPS.unshift({
-    id:nextId++, name, date, city, emoji:'📍',
-    weather:selectedWeather||'☀️', cost, notes, spots, photos:[], food, stay
-  });
-  saveTrips();
-  saveNextId();
-  renderCards();
-  closeAddForm();
-  goTo('records');
+  save(LS.TRIPS, TRIPS);
+  renderAll();
+  closeModal('day-form-modal');
+  // re-open detail
+  setTimeout(()=>openTripDetail(tripId),100);
 }
 
-// ── INIT ──
-renderCards();
-rebuildCityMap();
+// ─── FUND ────────────────────────────────────────────────────
+function renderFunds(){
+  const total=calcFund();
+  const pct=Math.min(100,Math.round(total/GOAL*1000)/10);
+  const remain=Math.max(0,GOAL-total);
+  const fmt2 = v=>'$'+Math.abs(v).toLocaleString();
+  document.getElementById('piggy-total').textContent=(total>=0?'+':'-')+fmt2(total);
+  document.getElementById('piggy-fill').style.width=pct+'%';
+  document.getElementById('piggy-pct').textContent=pct+'%';
+  document.getElementById('piggy-saved').textContent=fmt2(Math.max(0,total));
+  document.getElementById('piggy-remain').textContent=fmt2(remain);
+  const ICON={'股票獲利':'📈','股息入帳':'💵','旅行支出':'✈️','手動調整':'📝'};
+  const sorted=[...FUNDS].sort((a,b)=>b.date.localeCompare(a.date));
+  document.getElementById('fund-list').innerHTML = sorted.length===0
+    ? '<div style="font-size:.82rem;color:var(--light);padding:16px 0">還沒有紀錄</div>'
+    : sorted.map(f=>{
+        const out=f.type==='旅行支出';
+        return `<div class="hist-item" onclick="openFundForm(${f.id})">
+          <div class="hist-date">${fmt(f.date)}</div>
+          <div class="hist-info">
+            <div class="hist-type">${ICON[f.type]||''} ${f.type}</div>
+            ${f.note?`<div class="hist-note">${f.note}</div>`:''}
+          </div>
+          <div class="hist-amt ${out?'minus':'plus'}">${out?'-':'+'}$${f.amount.toLocaleString()}</div>
+        </div>`;
+      }).join('');
+}
+
+function openFundForm(id){
+  document.getElementById('fund-form-title').textContent=id!==undefined?'✏️ 編輯基金紀錄':'＋ 新增基金紀錄';
+  document.getElementById('ff-id').value='';
+  document.getElementById('ff-date').value='';
+  document.getElementById('ff-type').value='股票獲利';
+  document.getElementById('ff-amount').value='';
+  document.getElementById('ff-note').value='';
+  document.getElementById('ff-delete-btn').style.display='none';
+  if(id!==undefined){
+    const f=FUNDS.find(x=>x.id===id); if(!f) return;
+    document.getElementById('ff-id').value=id;
+    document.getElementById('ff-date').value=f.date||'';
+    document.getElementById('ff-type').value=f.type||'股票獲利';
+    document.getElementById('ff-amount').value=f.amount||'';
+    document.getElementById('ff-note').value=f.note||'';
+    document.getElementById('ff-delete-btn').style.display='block';
+  }
+  document.getElementById('fund-form-modal').classList.remove('hidden');
+  document.body.style.overflow='hidden';
+}
+
+function submitFund(){
+  const date=document.getElementById('ff-date').value;
+  const amount=parseInt(document.getElementById('ff-amount').value);
+  if(!date||!amount){alert('請填寫日期和金額');return;}
+  const idVal=document.getElementById('ff-id').value;
+  const entry={date,type:document.getElementById('ff-type').value,amount,note:document.getElementById('ff-note').value.trim()};
+  if(idVal){ const idx=FUNDS.findIndex(x=>x.id===parseInt(idVal)); if(idx!==-1) FUNDS[idx]={...FUNDS[idx],...entry}; }
+  else { FUNDS.push({id:nextFid++,...entry}); saveId(LS.FID,nextFid); }
+  save(LS.FUNDS,FUNDS);
+  renderFunds(); renderHome();
+  closeModal('fund-form-modal');
+}
+
+function confirmDeleteFund(){
+  const id=parseInt(document.getElementById('ff-id').value);
+  if(!confirm('確定要刪除這筆紀錄？')) return;
+  FUNDS=FUNDS.filter(x=>x.id!==id);
+  save(LS.FUNDS,FUNDS);
+  renderFunds(); renderHome();
+  closeModal('fund-form-modal');
+}
+
+// ─── MAP ────────────────────────────────────────────────────
+const TW_MAP={'台中':'pin-taichung','高雄':'pin-kaohsiung','嘉義':'pin-chiayi','台南':'pin-tainan','台北':'pin-taipei'};
+function renderMap(){
+  const regionCount={};
+  TRIPS.forEach(t=>{ if(t.region){ t.region.split(/[、,，]/).forEach(r=>{ const k=r.trim(); if(k) regionCount[k]=(regionCount[k]||0)+1; }); } });
+  // update pins
+  Object.entries(TW_MAP).forEach(([city,pinId])=>{
+    const pin=document.getElementById(pinId);
+    if(!pin) return;
+    const visited=Object.keys(regionCount).some(k=>k.includes(city)||city.includes(k));
+    pin.classList.toggle('visited',visited);
+  });
+  // region list
+  const keys=Object.keys(regionCount);
+  document.getElementById('map-region-list').innerHTML = keys.length===0
+    ? '<div style="font-size:.82rem;color:var(--light);padding:8px 0">還沒有旅行足跡</div>'
+    : `<div style="display:flex;flex-wrap:wrap;gap:8px">${keys.map(k=>`<span style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:4px 12px;font-size:.8rem;color:var(--text)">${k}（${regionCount[k]}次）</span>`).join('')}</div>`;
+}
+
+function showRegion(city){
+  const trips=TRIPS.filter(t=>t.region&&(t.region.includes(city)||city.includes(t.region)));
+  if(!trips.length) return;
+  const t=trips[0];
+  const cnt=trips.length;
+  document.getElementById('map-popup-content').innerHTML=`
+    <div class="popup-trip-name">📍 ${city}</div>
+    <div class="popup-meta">最近：${t.name||t.region} ・ ${fmtSlash(t.dateStart)}</div>
+    ${cnt>1?`<div style="font-size:.74rem;background:var(--card);display:inline-block;border-radius:20px;padding:2px 10px;margin-bottom:10px;color:var(--hi)">共去過 ${cnt} 次</div><br/>`:''}
+    <button class="popup-btn" onclick="openTripDetail(${t.id})">查看最近紀錄</button>`;
+  document.getElementById('map-popup').classList.remove('hidden');
+}
+
+// ─── MODAL ───────────────────────────────────────────────────
+function closeModal(id){
+  document.getElementById(id).classList.add('hidden');
+  // only unlock scroll if no other modal open
+  const anyOpen=[...document.querySelectorAll('.modal,.form-modal')].some(m=>!m.classList.contains('hidden'));
+  if(!anyOpen) document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    ['day-form-modal','trip-form-modal','fund-form-modal','trip-modal'].forEach(id=>{
+      if(!document.getElementById(id).classList.contains('hidden')) closeModal(id);
+    });
+  }
+});
+
+// ─── RENDER ALL ──────────────────────────────────────────────
+function renderAll(){
+  renderHome();
+  renderRecords();
+  if(!document.getElementById('page-map').classList.contains('active')) return;
+  renderMap();
+}
+
+
+// ─── INIT STAY STAR BUTTONS ──────────────────────────────────
+function initStayStars(){
+  ['clean','service','location','price'].forEach(k=>{
+    const container=document.getElementById(`df-stay-${k}-stars`);
+    if(container && !container.innerHTML.trim()){
+      container.innerHTML=starBtns(`df-stay-${k}`);
+    }
+  });
+}
+initStayStars();
+
+renderAll();
 </script>
 </body>
 </html>
