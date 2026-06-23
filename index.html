@@ -3,7 +3,7 @@
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <title>🎒 寶寶旅遊日記</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -144,7 +144,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--body);min-height:1
 .modal-overlay{position:absolute;inset:0;background:rgba(60,80,90,.38);backdrop-filter:blur(2px)}
 .modal-box{position:relative;z-index:1;background:var(--white);border-radius:var(--rlg) var(--rlg) 0 0;width:100%;max-height:93vh;overflow-y:auto;padding:28px 20px 48px;animation:slideUp .26s ease}
 @keyframes slideUp{from{transform:translateY(100%);opacity:0}to{transform:translateY(0);opacity:1}}
-.modal-close{position:absolute;top:16px;right:18px;background:var(--card);border:none;border-radius:50%;width:32px;height:32px;font-size:1rem;color:var(--sub);cursor:pointer;display:flex;align-items:center;justify-content:center}
+.modal-close{position:sticky;top:0;float:right;margin-bottom:-32px;z-index:10;background:var(--card);border:none;border-radius:50%;width:32px;height:32px;font-size:1rem;color:var(--sub);cursor:pointer;display:flex;align-items:center;justify-content:center}
 .modal-title{font-family:var(--serif);font-size:1.15rem;font-weight:700;color:var(--text);margin-bottom:20px}
 
 /* TRIP DETAIL MODAL */
@@ -194,10 +194,10 @@ body{background:var(--bg);color:var(--text);font-family:var(--body);min-height:1
 .form-close{position:absolute;top:16px;right:18px;background:var(--card);border:none;border-radius:50%;width:32px;height:32px;font-size:1rem;color:var(--sub);cursor:pointer;display:flex;align-items:center;justify-content:center}
 .form-group{margin-bottom:16px}
 .form-label{display:block;font-size:.76rem;font-weight:600;color:var(--sub);letter-spacing:.04em;margin-bottom:5px}
-.form-input{width:100%;padding:10px 13px;background:var(--white);border:1.5px solid var(--border);border-radius:var(--rsm);font-family:var(--body);font-size:.88rem;color:var(--text);transition:border-color .18s;appearance:none;-webkit-appearance:none}
+.form-input{width:100%;padding:10px 13px;background:var(--white);border:1.5px solid var(--border);border-radius:var(--rsm);font-family:var(--body);font-size:16px;color:var(--text);transition:border-color .18s;appearance:none;-webkit-appearance:none}
 .form-input:focus{outline:none;border-color:var(--accent)}
 .form-input::placeholder{color:var(--light)}
-textarea.form-input{resize:vertical;min-height:76px;line-height:1.6}
+textarea.form-input{resize:vertical;min-height:76px;line-height:1.6;font-size:16px}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .form-divider{border:none;border-top:1px solid var(--border);margin:18px 0}
 .form-submit{width:100%;padding:13px;background:var(--card);color:var(--hi);border:1.5px solid var(--accent);border-radius:var(--rmd);font-family:var(--serif);font-size:.95rem;font-weight:600;cursor:pointer;margin-top:6px;transition:background .18s}
@@ -289,16 +289,19 @@ textarea.form-input{resize:vertical;min-height:76px;line-height:1.6}
 
     <!-- 2. 下一次旅行目標 -->
     <section style="margin-bottom:18px">
-      <div class="sec-label">✈️ 下一次旅行目標</div>
-      <div class="card" style="padding:16px">
-        <div style="font-family:var(--serif);font-size:1.15rem;font-weight:700;margin-bottom:12px">🇯🇵 日本大阪</div>
+      <div class="sec-header">
+        <div class="sec-label">✈️ 下一次旅行目標</div>
+        <button class="link-btn" onclick="openGoalForm()">編輯目標</button>
+      </div>
+      <div class="card" style="padding:16px" id="home-goal-card">
+        <div style="font-family:var(--serif);font-size:1.15rem;font-weight:700;margin-bottom:12px" id="home-goal-title">載入中…</div>
         <div class="prog-wrap">
           <div class="prog-bar"><div class="prog-fill" id="home-goal-fill" style="width:0%"></div></div>
           <div class="prog-pct" id="home-goal-pct">0%</div>
         </div>
         <div style="display:flex;justify-content:space-between;font-size:.8rem;color:var(--sub)">
           <span>已存 <strong id="home-goal-saved" style="color:var(--text)">$0</strong></span>
-          <span>目標 <strong style="color:var(--text)">$30,000</strong></span>
+          <span>目標 <strong id="home-goal-amount" style="color:var(--text)">$0</strong></span>
         </div>
       </div>
     </section>
@@ -344,20 +347,26 @@ textarea.form-input{resize:vertical;min-height:76px;line-height:1.6}
       <div class="piggy-item"><div class="piggy-label">旅行基金累積</div><div class="piggy-val green" id="piggy-total">$0</div></div>
     </div>
     <div class="goal-card">
-      <div class="goal-hd">
-        <div class="goal-flag">🇯🇵</div>
-        <div><div class="goal-name">日本大阪</div><div class="goal-tag">下一次旅行目標</div></div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px">
+        <div class="goal-hd" style="margin-bottom:0">
+          <div class="goal-flag" id="piggy-goal-flag">✈️</div>
+          <div>
+            <div class="goal-name" id="piggy-goal-name">載入中…</div>
+            <div class="goal-tag">下一次旅行目標</div>
+          </div>
+        </div>
+        <button class="btn-sm" onclick="openGoalForm()" style="flex-shrink:0;margin-top:2px">編輯目標</button>
       </div>
       <div class="prog-wrap">
         <div class="prog-bar"><div class="prog-fill" id="piggy-fill" style="width:0%"></div></div>
         <div class="prog-pct" id="piggy-pct">0%</div>
       </div>
       <div class="goal-nums">
-        <div><div class="goal-num-label">目標金額</div><div class="goal-num-val">$30,000</div></div>
+        <div><div class="goal-num-label">目標金額</div><div class="goal-num-val" id="piggy-goal-amount">$0</div></div>
         <div><div class="goal-num-label">已累積</div><div class="goal-num-val accent" id="piggy-saved">$0</div></div>
-        <div><div class="goal-num-label">還差</div><div class="goal-num-val" id="piggy-remain">$30,000</div></div>
+        <div><div class="goal-num-label">還差</div><div class="goal-num-val" id="piggy-remain">$0</div></div>
       </div>
-      <div class="goal-note">繼續讓收益跑吧，大阪等著我們 ✈️</div>
+      <div class="goal-note" id="piggy-goal-note">繼續讓收益跑吧 ✈️</div>
     </div>
     <button class="btn-primary" onclick="openFundForm()">＋ 新增基金紀錄</button>
     <div class="sec-label">紀錄明細</div>
@@ -554,7 +563,6 @@ textarea.form-input{resize:vertical;min-height:76px;line-height:1.6}
       <select class="form-input" id="ff-type">
         <option value="股票獲利">股票獲利</option>
         <option value="股息入帳">股息入帳</option>
-        <option value="旅行支出">旅行支出</option>
         <option value="手動調整">手動調整</option>
       </select>
     </div>
@@ -568,6 +576,32 @@ textarea.form-input{resize:vertical;min-height:76px;line-height:1.6}
     </div>
     <button class="form-submit" onclick="submitFund()">儲存</button>
     <button id="ff-delete-btn" class="btn-danger" onclick="confirmDeleteFund()" style="display:none">刪除這筆紀錄</button>
+  </div>
+</div>
+
+<!-- ═══ GOAL FORM MODAL ═══ -->
+<div id="goal-form-modal" class="form-modal hidden">
+  <div class="form-overlay" onclick="closeModal('goal-form-modal')"></div>
+  <div class="form-box">
+    <button class="form-close" onclick="closeModal('goal-form-modal')">✕</button>
+    <div class="form-title">✈️ 旅行目標設定</div>
+    <div class="form-group">
+      <label class="form-label">目標名稱 <span style="color:var(--light);font-weight:400">（選填）</span></label>
+      <input class="form-input" id="gf-name" type="text" placeholder="例：北海道賞雪之旅"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">目標國家 <span style="color:var(--red)">*</span></label>
+      <input class="form-input" id="gf-country" type="text" placeholder="例：日本"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">目標區域 <span style="color:var(--red)">*</span></label>
+      <input class="form-input" id="gf-region" type="text" placeholder="例：北海道"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">目標金額 <span style="color:var(--red)">*</span></label>
+      <input class="form-input" id="gf-amount" type="number" placeholder="例：50000"/>
+    </div>
+    <button class="form-submit" onclick="submitGoal()">儲存目標</button>
   </div>
 </div>
 
@@ -614,9 +648,11 @@ function daysBetween(a,b){
 // ─── LOCALSTORAGE ────────────────────────────────────────────
 const LS = {
   TRIPS:'bt_trips', FUNDS:'bt_funds',
-  TID:'bt_tid', FID:'bt_fid'
+  TID:'bt_tid', FID:'bt_fid',
+  GOAL:'bt_goal'
 };
-const GOAL = 30000;
+
+const SEED_GOAL = { name:'', country:'日本', region:'大阪', amount:30000 };
 
 const SEED_TRIPS = [
   {
@@ -668,8 +704,7 @@ const SEED_TRIPS = [
 
 const SEED_FUNDS = [
   {id:1, date:'2025-03-10', type:'股息入帳', amount:3200, note:'00929 股息'},
-  {id:2, date:'2025-01-05', type:'股票獲利', amount:4800, note:'價差獲利'},
-  {id:3, date:'2024-12-20', type:'旅行支出', amount:5500, note:'嘉義旅行花費'}
+  {id:2, date:'2025-01-05', type:'股票獲利', amount:4800, note:'價差獲利'}
 ];
 
 function loadData(key, seed){
@@ -683,8 +718,9 @@ function saveId(key, v){ localStorage.setItem(key, String(v)); }
 
 let TRIPS = loadData(LS.TRIPS, SEED_TRIPS);
 let FUNDS = loadData(LS.FUNDS, SEED_FUNDS);
+let GOAL_OBJ = loadData(LS.GOAL, SEED_GOAL);
 let nextTid = loadId(LS.TID, 3);
-let nextFid = loadId(LS.FID, 4);
+let nextFid = loadId(LS.FID, 3);
 
 // ─── NAV ────────────────────────────────────────────────────
 function goTo(p){
@@ -699,21 +735,45 @@ function goTo(p){
 document.querySelectorAll('.nav-btn').forEach(b=>b.addEventListener('click',()=>goTo(b.dataset.page)));
 
 // ─── FUND CALC ───────────────────────────────────────────────
+// Income: FUNDS only (股票獲利, 股息入帳, 手動調整)
+// Expense: auto-summed from all trip costs — no manual entry needed
+function calcFundIncome(){
+  return FUNDS.reduce((s,f)=>s+f.amount, 0);
+}
+function calcTripExpense(){
+  return TRIPS.reduce((s,t)=>s+(t.cost||0), 0);
+}
 function calcFund(){
-  return FUNDS.reduce((s,f)=>f.type==='旅行支出'?s-f.amount:s+f.amount, 0);
+  return calcFundIncome() - calcTripExpense();
+}
+function getGoalAmount(){
+  return GOAL_OBJ?.amount || 30000;
+}
+function goalDisplayTitle(){
+  const g = GOAL_OBJ;
+  if(!g) return '尚未設定目標';
+  const loc = [g.country, g.region].filter(Boolean).join('｜');
+  return g.name ? `${g.name}・${loc}` : loc;
 }
 
 // ─── RENDER HOME ────────────────────────────────────────────
 function renderHome(){
-  // fund
-  const total = calcFund();
-  const pct = Math.min(100, Math.round(total/GOAL*1000)/10);
+  const total   = calcFund();
+  const goalAmt = getGoalAmount();
+  const pct     = Math.min(100, Math.round(total/goalAmt*1000)/10);
+
+  // fund card
   document.getElementById('home-fund-total').textContent = (total>=0?'+$':'-$')+Math.abs(total).toLocaleString();
   document.getElementById('home-fund-fill').style.width = pct+'%';
-  document.getElementById('home-fund-pct').textContent = pct+'%';
-  document.getElementById('home-goal-fill').style.width = pct+'%';
-  document.getElementById('home-goal-pct').textContent = pct+'%';
-  document.getElementById('home-goal-saved').textContent = '$'+Math.max(0,total).toLocaleString();
+  document.getElementById('home-fund-pct').textContent  = pct+'%';
+
+  // goal card
+  document.getElementById('home-goal-title').textContent  = goalDisplayTitle();
+  document.getElementById('home-goal-fill').style.width   = pct+'%';
+  document.getElementById('home-goal-pct').textContent    = pct+'%';
+  document.getElementById('home-goal-saved').textContent  = '$'+Math.max(0,total).toLocaleString();
+  document.getElementById('home-goal-amount').textContent = '$'+goalAmt.toLocaleString();
+
   // places
   const regionCount={};
   TRIPS.forEach(t=>{ if(t.region){ const k=t.region; regionCount[k]=(regionCount[k]||0)+1; } });
@@ -721,6 +781,7 @@ function renderHome(){
   document.getElementById('home-place-count').textContent=keys.length;
   document.getElementById('home-place-list').textContent = keys.length===0
     ? '還沒有旅行紀錄' : keys.map(k=>regionCount[k]>1?`${k}（${regionCount[k]}次）`:k).join('・');
+
   // recent trips
   const sorted=[...TRIPS].sort((a,b)=>b.dateStart.localeCompare(a.dateStart));
   document.getElementById('home-cards').innerHTML = sorted.slice(0,2).map(tripCardHTML).join('') ||
@@ -1069,30 +1130,72 @@ function submitDay(){
 
 // ─── FUND ────────────────────────────────────────────────────
 function renderFunds(){
-  const total=calcFund();
-  const pct=Math.min(100,Math.round(total/GOAL*1000)/10);
-  const remain=Math.max(0,GOAL-total);
-  const fmt2 = v=>'$'+Math.abs(v).toLocaleString();
-  document.getElementById('piggy-total').textContent=(total>=0?'+':'-')+fmt2(total);
-  document.getElementById('piggy-fill').style.width=pct+'%';
-  document.getElementById('piggy-pct').textContent=pct+'%';
-  document.getElementById('piggy-saved').textContent=fmt2(Math.max(0,total));
-  document.getElementById('piggy-remain').textContent=fmt2(remain);
-  const ICON={'股票獲利':'📈','股息入帳':'💵','旅行支出':'✈️','手動調整':'📝'};
+  const income  = calcFundIncome();
+  const expense = calcTripExpense();
+  const total   = income - expense;
+  const goalAmt = getGoalAmount();
+  const pct     = Math.min(100, Math.round(total/goalAmt*1000)/10);
+  const remain  = Math.max(0, goalAmt - total);
+  const fmt2    = v=>'$'+Math.abs(v).toLocaleString();
+
+  // goal card
+  const g = GOAL_OBJ;
+  document.getElementById('piggy-goal-flag').textContent  = g?.country==='台灣'?'🇹🇼':'🇯🇵';
+  document.getElementById('piggy-goal-name').textContent  = goalDisplayTitle();
+  document.getElementById('piggy-goal-amount').textContent= fmt2(goalAmt);
+  document.getElementById('piggy-fill').style.width = pct+'%';
+  document.getElementById('piggy-pct').textContent  = pct+'%';
+  document.getElementById('piggy-saved').textContent  = fmt2(Math.max(0,total));
+  document.getElementById('piggy-remain').textContent = fmt2(remain);
+  document.getElementById('piggy-goal-note').textContent =
+    total>=goalAmt ? '🎉 目標達成！可以出發了！' : `繼續加油，還差 ${fmt2(remain)} ✈️`;
+
+  // overview numbers
+  document.getElementById('piggy-total').textContent = (total>=0?'+':'-')+fmt2(total);
+
+  const ICON={'股票獲利':'📈','股息入帳':'💵','手動調整':'📝'};
   const sorted=[...FUNDS].sort((a,b)=>b.date.localeCompare(a.date));
-  document.getElementById('fund-list').innerHTML = sorted.length===0
-    ? '<div style="font-size:.82rem;color:var(--light);padding:16px 0">還沒有紀錄</div>'
-    : sorted.map(f=>{
-        const out=f.type==='旅行支出';
-        return `<div class="hist-item" onclick="openFundForm(${f.id})">
-          <div class="hist-date">${fmt(f.date)}</div>
+
+  // trip expense list (read-only)
+  const tripsSorted=[...TRIPS].filter(t=>t.cost>0).sort((a,b)=>b.dateStart.localeCompare(a.dateStart));
+  const tripExpHTML = tripsSorted.length===0
+    ? '<div style="font-size:.8rem;color:var(--light);padding:8px 0">尚無旅行花費</div>'
+    : tripsSorted.map(t=>{
+        const loc=[t.country,t.region].filter(Boolean).join('｜');
+        return `<div class="hist-item" style="cursor:default">
+          <div class="hist-date">${fmt(t.dateStart)}</div>
           <div class="hist-info">
-            <div class="hist-type">${ICON[f.type]||''} ${f.type}</div>
-            ${f.note?`<div class="hist-note">${f.note}</div>`:''}
+            <div class="hist-type">✈️ ${loc}</div>
+            ${t.name?`<div class="hist-note">${t.name}</div>`:''}
           </div>
-          <div class="hist-amt ${out?'minus':'plus'}">${out?'-':'+'}$${f.amount.toLocaleString()}</div>
+          <div class="hist-amt minus">-$${t.cost.toLocaleString()}</div>
         </div>`;
       }).join('');
+
+  document.getElementById('fund-list').innerHTML =
+    `<div style="margin-bottom:18px">
+      <div class="sec-label" style="margin-bottom:8px">基金收入</div>
+      ${sorted.length===0
+        ? '<div style="font-size:.8rem;color:var(--light);padding:8px 0">還沒有收入紀錄</div>'
+        : sorted.map(f=>`<div class="hist-item" onclick="openFundForm(${f.id})">
+            <div class="hist-date">${fmt(f.date)}</div>
+            <div class="hist-info">
+              <div class="hist-type">${ICON[f.type]||''} ${f.type}</div>
+              ${f.note?`<div class="hist-note">${f.note}</div>`:''}
+            </div>
+            <div class="hist-amt plus">+$${f.amount.toLocaleString()}</div>
+          </div>`).join('')}
+      <div style="display:flex;justify-content:flex-end;font-size:.78rem;color:var(--sub);margin-top:8px;padding-top:8px;border-top:1px solid var(--border)">
+        收入合計 <strong style="color:var(--green);margin-left:6px">+$${income.toLocaleString()}</strong>
+      </div>
+    </div>
+    <div>
+      <div class="sec-label" style="margin-bottom:8px">旅行花費（自動從旅行日記抓取）</div>
+      ${tripExpHTML}
+      <div style="display:flex;justify-content:flex-end;font-size:.78rem;color:var(--sub);margin-top:8px;padding-top:8px;border-top:1px solid var(--border)">
+        花費合計 <strong style="color:var(--red);margin-left:6px">-$${expense.toLocaleString()}</strong>
+      </div>
+    </div>`;
 }
 
 function openFundForm(id){
@@ -1193,6 +1296,32 @@ function renderAll(){
   renderMap();
 }
 
+
+// ─── GOAL FORM ───────────────────────────────────────────────
+function openGoalForm(){
+  const g = GOAL_OBJ || {};
+  document.getElementById('gf-name').value    = g.name||'';
+  document.getElementById('gf-country').value = g.country||'';
+  document.getElementById('gf-region').value  = g.region||'';
+  document.getElementById('gf-amount').value  = g.amount||'';
+  document.getElementById('goal-form-modal').classList.remove('hidden');
+  document.body.style.overflow='hidden';
+}
+
+function submitGoal(){
+  const country = document.getElementById('gf-country').value.trim();
+  const region  = document.getElementById('gf-region').value.trim();
+  const amount  = parseInt(document.getElementById('gf-amount').value);
+  if(!country||!region||!amount){ alert('請填寫目標國家、區域和金額'); return; }
+  GOAL_OBJ = {
+    name:    document.getElementById('gf-name').value.trim(),
+    country, region, amount
+  };
+  save(LS.GOAL, GOAL_OBJ);
+  renderHome();
+  renderFunds();
+  closeModal('goal-form-modal');
+}
 
 // ─── INIT STAY STAR BUTTONS ──────────────────────────────────
 function initStayStars(){
